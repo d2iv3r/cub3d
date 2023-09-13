@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:14:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/13 16:26:14 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:18:05 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	get_space(t_map *map)
 			w = ft_strlen(map->tmap->map[i]);
 		i++;
 	}
-	map->weight = w * 40;
-	map->height = i * 40;
+	map->weight = w * 80;
+	map->height = i * 80;
 }

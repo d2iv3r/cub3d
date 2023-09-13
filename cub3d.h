@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/13 16:41:44 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/13 22:54:05 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,20 +129,21 @@ int		is_wall(t_map *s ,float x, float y);
 void    normalize_angle(t_ray *r);
 void	init_angle(t_map *s);
 void	handler_move_view(t_map *s);
+void	direction_player(t_map *s, float distance);
 
 //	UTILS MAP
-char		*ft_read_file(int fd);
-char		*remove_empty(char *s);
-void		init_tmap(t_pmap *tmap);
-void		check_empty_lines(char *s);
-int			num_lines(char **arr);
-char		*get_iden(char *s);
-char		*get_info(char *s);
+char	*ft_read_file(int fd);
+char	*remove_empty(char *s);
+void	init_tmap(t_pmap *tmap);
+void	check_empty_lines(char *s);
+int		num_lines(char **arr);
+char	*get_iden(char *s);
+char	*get_info(char *s);
 
-int			ft_error(char *str, int ex, int ret);
-void		clean_arr2d(char **arr2d);
+int		ft_error(char *str, int ex, int ret);
+void	clean_arr2d(char **arr2d);
 
-int			check_map(t_pmap *tmap);
-int			closed_map(t_pmap tmap);
+int		check_map(t_pmap *tmap);
+int		closed_map(t_pmap tmap);
 
 #endif

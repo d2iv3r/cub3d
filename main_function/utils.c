@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:10:11 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 16:45:04 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:26:13 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	player_pos(t_map *map)
 		{
 			if (map->tmap->map[i][j] == 'S')
 			{
-				map->px = (j * 40);
-				map->py = (i * 40);
+				map->px = (j * 80);
+				map->py = (i * 80);
 			}
 		}
 	}
@@ -41,8 +41,8 @@ void	put_rays(t_map *s, float angle, double distance)
 	float	X;
 	float	Y;
 
-	p.x2 = s->px + (cos(angle) * distance);
-	p.y2 = s->py + (sin(angle) * distance);
+	p.x2 = s->px + (cos(angle) * (distance * 0.2));
+	p.y2 = s->py + (sin(angle) * (distance * 0.2));
 	p.dx = p.x2 - s->px;
 	p.dy = p.y2 - s->py;
 	if (_abs(p.dy) > _abs(p.dx))
@@ -52,8 +52,8 @@ void	put_rays(t_map *s, float angle, double distance)
 	p.xinc = p.dx / (float)p.steps;
 	p.yinc = p.dy / (float)p.steps;
 	i = -1;
-	X = s->px;
-	Y = s->py;
+	X = s->px * 0.2;
+	Y = s->py * 0.2;
 	while (++i < p.steps)
 	{
 		if (X >= 0 && X <= (int)s->weight && Y >= 0 && Y <= (int)s->height)
@@ -89,11 +89,19 @@ void	init_value(t_map *s)
 		ft_error("Error\nmlx_imge_to window", 1, 0);
 	drawing_img(s);
 	player_pos(s);
-	pixels_player(s, s->px, s->py);
+	pixels_player(s, s->px * 0.2, s->py * 0.2);
 }
 
 void	init_angle(t_map *s)
 {
+	if (s->tmap->pos == 'S')
+		s->ongl = 90 * (M_PI / 180);
+	if (s->tmap->pos == 'W')
+		s->ongl = 180 * (M_PI / 180);
+	if (s->tmap->pos == 'E')
+		s->ongl = 0;
+	if (s->tmap->pos == 'N')
+		s->ongl = 270 * (M_PI / 180);
 	s->rotation_speed = 2 * (M_PI / 180);
 	s->fov = 60 * (M_PI / 180);
 	s->move_speed = 3;
@@ -102,9 +110,4 @@ void	init_angle(t_map *s)
 	s->lr_walk = 0;
 	s->xv = 0;
 	s->yv = 0;
-	if (s->tmap->pos == 'S')
-	{
-		s->rotation_angle = 90 * (M_PI / 180);
-		s->ongl = 90 * (M_PI / 180);
-	}
 }

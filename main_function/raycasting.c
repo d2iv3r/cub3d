@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 16:34:40 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:24:35 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	cast_rays(t_map *s)
 	while (i < (int)(s->weight))
 	{
 		normalize_angle(&r);
-		w_s = (530/first_cray(s, &r)) * 100;
+		w_s = ((s->height / 2)/first_cray(s, &r)) * 500;
 		r.ray_angle += s->fov / s->weight;
 		draw_colome(s, i, w_s);
 		i++;
@@ -60,13 +60,13 @@ double	first_cray(t_map *s, t_ray *r)
 	dis_v = sqrt(pow(r->cxv - s->px, 2) + pow(r->cyv - s->py, 2));
 	if (dis_h <= dis_v)
 	{
-		// put_rays(s, r->ray_angle, dis_h);
+		put_rays(s, r->ray_angle, dis_h);
 		dis = dis_h;
 		s->color = 0x00FF00FF;
 	}
 	else if (dis_h > dis_v)
 	{
-		// put_rays(s, r->ray_angle, dis_v);
+		put_rays(s, r->ray_angle, dis_v);
 		dis = dis_v;
 		s->color = 0x0000FFFF;
 	}
@@ -75,15 +75,15 @@ double	first_cray(t_map *s, t_ray *r)
 
 int is_wall(t_map *s ,float y, float x)
 {
-	if (x < 0)
+	if (x <= 0)
 		return (1);
-	else if (x > (int)(s->weight))
+	else if (x >= (int)(s->weight))
 		return (1);
-	else if (y < 0)
+	else if (y <= 0)
 		return (1);
-	else if (y > (int)(s->height))
+	else if (y >= (int)(s->height))
 		return (1);
-	else if (s->tmap->map[(int)floor (y / 40)][(int)floor (x / 40)] == '1')
+	else if (s->tmap->map[(int)floor (y / 80)][(int)floor (x / 80)] == '1')
 		return (1);
 	else
 		return (0);
@@ -96,21 +96,21 @@ void	raycating_vertical(t_map *s, t_ray *r)
 
 	if (r->ray_angle >= (M_PI / 2) && r->ray_angle <= (1.5 * M_PI))
 	{
-		r->cxv = floor(s->px / 40) * 40 - 0.0006;
+		r->cxv = floor(s->px / 80) * 80 - 0.0006;
 		r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
 		if (is_wall(s, r->cyv, r->cxv))
 			return ;
-		steps_x = -40;
+		steps_x = -80;
 		steps_y = steps_x * tan(r->ray_angle);
 	}
 	else
 	{
-		r->cxv = (floor(s->px / 40) * 40) + 40;
+		r->cxv = (floor(s->px / 80) * 80) + 80;
 		r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
 		if (is_wall(s,r->cyv, r->cxv))
 			return ;
-		steps_x = 40;
-		steps_y = (40 * tan(r->ray_angle));
+		steps_x = 80;
+		steps_y = (80 * tan(r->ray_angle));
 	}
 	while (1)
 	{
@@ -128,20 +128,20 @@ void	raycating_horizontal(t_map *s, t_ray *r)
 	
 	if (r->ray_angle >= 0 && r->ray_angle <= M_PI)
 	{
-		r->cyh = (floor(s->py / 40) * 40) + 40;
+		r->cyh = (floor(s->py / 80) * 80) + 80;
 		r->cxh = s->px + ((r->cyh - s->py) / tan(r->ray_angle));
 		if (is_wall(s,r->cyh, r->cxh))
 			return ;
-		steps_x = 40 / tan(r->ray_angle);
-		steps_y = 40;
+		steps_x = 80 / tan(r->ray_angle);
+		steps_y = 80;
 	}
 	else if (r->ray_angle >= M_PI)
 	{
-		r->cyh = floor(s->py / 40) * 40 - 0.0006;
+		r->cyh = floor(s->py / 80) * 80 - 0.0006;
 		r->cxh = s->px + ((r->cyh - s->py) / tan(r->ray_angle));
 		if (is_wall(s,r->cyh, r->cxh))
 			return ;
-		steps_y = -40;
+		steps_y = -80;
 		steps_x = steps_y / tan(r->ray_angle);
 	}
 	while (1)

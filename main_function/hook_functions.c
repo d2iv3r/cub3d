@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 16:46:03 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:19:25 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,47 @@ void	handler_moves(void *param)
 	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);
 	if (s->window < 0)
 		ft_error("Error\nmlx_imge_to window", 1, 0);
+	cast_rays(s);
 	drawing_img(s);
 	handler_move_view(s);
-	pixels_player(s, s->px, s->py);
-	put_rays(s, s->ongl, 20);
-	cast_rays(s);
+	pixels_player(s, s->px * 0.2, s->py * 0.2);
+	direction_player(s, 20);
 	s->lr_walk = 0;
 	s->ud_walk = 0;
 	s->lr_view = 0;
+}
+
+void	direction_player(t_map *s, float distance)
+{
+	t_point	p;
+	int		i;
+	float	X;
+	float	Y;
+
+	p.x2 = s->px + (cos(s->ongl) * distance);
+	p.y2 = s->py + (sin(s->ongl) * distance);
+	p.dx = p.x2 - s->px;
+	p.dy = p.y2 - s->py;
+	if (_abs(p.dy) > _abs(p.dx))
+		p.steps = _abs(p.dy);
+	else
+		p.steps = _abs(p.dx);
+	p.xinc = p.dx / (float)p.steps;
+	p.yinc = p.dy / (float)p.steps;
+	i = -1;
+	X = s->px * 0.2;
+	Y = s->py * 0.2;
+	while (++i < p.steps)
+	{
+		if (X >= 0 && X <= (int)s->weight && Y >= 0 && Y <= (int)s->height)
+		{
+			mlx_put_pixel(s->img, floor(X), floor(Y), 0xFF5733FF);
+			X += p.xinc;
+			Y += p.yinc;
+		}
+		else
+			break ;
+	}
 }
 
 void	handler_move_view(t_map *s)
@@ -99,8 +132,8 @@ void	walk_move(t_map *map)
 
 void	check_wall(t_map *map, float x, float y)
 {
-	if (map->tmap->map[(int)floor(y / 40)][(int)floor(x / 40)] != '1' && \
-		 map->tmap->map[(int)floor((y + 8)/ 40)][(int)floor((x + 8)/ 40)] != '1')
+	if (map->tmap->map[(int)floor(y / 80)][(int)floor(x / 80)] != '1' && \
+		 map->tmap->map[(int)floor((y + 4)/ 80)][(int)floor((x + 4)/ 80)] != '1')
 	{
 		map->px = x;
 		map->py = y;

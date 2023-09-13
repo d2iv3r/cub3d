@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:02:50 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 16:47:46 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/13 23:18:08 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,33 @@ void	drawing_img(t_map *map)
 	int	i;
 	int	j;
 
-	unsigned int color = 0x000000FF;
-	// i = -1;
-	// while (map->tmap->map[++i])
-	// {
-	// 	j = -1;
-	// 	while (map->tmap->map[i][++j])
-	// 	{
-	// 		if (map->tmap->map[i][j] == '1')
-	// 			pixels_wall(map, (j * 40), (i * 40));
-	// 	}
-	// }
-	i = 0;
-	j = 0;
-	while (i < (int)map->weight)
+	// unsigned int color = 0x000000FF;
+	
+	i = -1;
+	while (map->tmap->map[++i])
 	{
-		while (j < (int)map->height)
+		j = -1;
+		while (map->tmap->map[i][++j])
 		{
-			color = 0x000000FF;
-			if (j >= (int)(map->height / 2))
-				color = 0xFFFFFFFF;
-			mlx_put_pixel(map->img, i, j, color);
-			j++;	
+			if (map->tmap->map[i][j] == '1')
+				pixels_wall(map, (j * 80) * 0.2, (i * 80) * 0.2);
 		}
-		j = 0;
-		i++;
 	}
+	// i = 0;
+	// j = 0;
+	// while (i < (int)map->weight)
+	// {
+	// 	while (j < (int)map->height)
+	// 	{
+	// 		color = 0x000000FF;
+	// 		if (j >= (int)(map->height / 2))
+	// 			color = 0xFFFFFFFF;
+	// 		mlx_put_pixel(map->img, i, j, color);
+	// 		j++;	
+	// 	}
+	// 	j = 0;
+	// 	i++;
+	// }
 }
 
 void	pixels_wall(t_map *map, int x, int y)
