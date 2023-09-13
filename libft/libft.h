@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:30:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/11 16:58:46 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:21:44 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+
+char	*_strjoin(const char *s1, const char *s2);
+char	**_split(const char *s, char c);
+char	*_substr(const char *s, unsigned int start, size_t len);
 
 char		*ft_strrchr(const char *s, int c);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);

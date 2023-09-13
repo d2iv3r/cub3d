@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/11 16:48:09 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/11 17:35:31 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 14:49:06 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 void	check_empty_lines(char *s)
 {

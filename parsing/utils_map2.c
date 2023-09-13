@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:15:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/11 17:35:10 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 15:08:05 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int	closed_map(t_map tmap)
+int	closed_map(t_pmap tmap)
 {
 	int	i;
 	int	j;
@@ -93,7 +93,7 @@ t_element	*init_telem(char *map)
 	return (telem);
 }
 
-void	get_map(char **map, t_map *tmap)
+void	get_pmap(char **map, t_pmap *tmap)
 {
 	int		i;
 	size_t	ll;
@@ -122,7 +122,7 @@ void	get_map(char **map, t_map *tmap)
 	tmap->map[i] = NULL;
 }
 
-void	init_tmap(t_map *tmap)
+void	init_tmap(t_pmap *tmap)
 {
 	char	*s;
 	char	*tmp;
@@ -145,6 +145,6 @@ void	init_tmap(t_map *tmap)
 	if (!map || !*map)
 		ft_error("Error:\n Invalid map!", 1, 0);
 	free(s);
-	get_map(map, tmap);
+	get_pmap(map, tmap);
 	clean_arr2d(map);
 }

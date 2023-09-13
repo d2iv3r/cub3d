@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:48:11 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/11 16:44:58 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:14:59 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	check_map_ext(char *mapfile)
 {
@@ -24,7 +24,7 @@ int	check_map_ext(char *mapfile)
 	return (1);
 }
 
-int	check_elements(t_map tmap)
+int	check_elements(t_pmap tmap)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ int	check_elements(t_map tmap)
 	return (1);
 }
 
-int	check_colors(t_map tmap)
+int	check_colors(t_pmap tmap)
 {
 	int		i;
 	char	**tmp;
@@ -78,7 +78,7 @@ int	check_colors(t_map tmap)
 	return (1);
 }
 
-int	check_characters(char **map)
+int	check_characters(t_pmap *tmap)
 {
 	int	i;
 	int	j;
@@ -86,18 +86,21 @@ int	check_characters(char **map)
 
 	i = 0;
 	p = 0;
-	while (map[i])
+	while (tmap->map[i])
 	{
 		j = 0;
-		while (map[i][j])
+		while (tmap->map[i][j])
 		{
-			if (map[i][j] != '0' && map[i][j] != '1' && map[i][j] != 'N'
-				&& map[i][j] != 'S' && map[i][j] != 'E' && map[i][j] != 'W'
-				&& map[i][j] != ' ')
+			if (tmap->map[i][j] != '0' && tmap->map[i][j] != '1' && tmap->map[i][j] != 'N'
+				&& tmap->map[i][j] != 'S' && tmap->map[i][j] != 'E' && tmap->map[i][j] != 'W'
+				&& tmap->map[i][j] != ' ')
 				return (0);
-			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
-				|| map[i][j] == 'W')
+			if (tmap->map[i][j] == 'N' || tmap->map[i][j] == 'S' || tmap->map[i][j] == 'E'
+				|| tmap->map[i][j] == 'W')
+			{
+				tmap->pos = tmap->map[i][j];
 				p++;
+			}
 			j++;
 		}
 		i++;
@@ -107,7 +110,7 @@ int	check_characters(char **map)
 	return (1);
 }
 
-int	check_map(t_map *tmap)
+int	check_map(t_pmap *tmap)
 {
 	tmap->fd = open(tmap->file, O_RDONLY);
 	if (tmap->fd == -1)
@@ -119,7 +122,7 @@ int	check_map(t_map *tmap)
 		return (ft_error("Error:\n Invalid identifier or path!", 1, 0));
 	if (!check_colors(*tmap))
 		return (ft_error("Error:\n colors in range [0,255]", 1, 0));
-	if (!check_characters(tmap->map))
+	if (!check_characters(tmap))
 		ft_error("Error:\n Invalid characters in the map!", 1, 0);
 	if (!closed_map(*tmap))
 		ft_error("Error:\n The map isn't closed!", 1, 0);

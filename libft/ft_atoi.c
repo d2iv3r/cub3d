@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:03:32 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/11 17:36:37 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:09:42 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,16 @@ int	ft_atoi(const char *str)
 		if (str[i] == '-')
 			s = -1;
 	}
-	while (str[i++] != '\0')
+	while (str[i] != '\0')
 	{
-		if (!ft_isdigit(str[i]))
-			ft_error("Error:\n colors must be a number!", 1, 0);
+		// if (!ft_isdigit(str[i]))
+		// 	ft_error("Error:\n colors must be a number!", 1, 0);
 		nb = nb * 10 + (str[i] - 48);
 		if (nb >= 9223372036854775807 && s == 1)
 			return (-1);
 		if (nb > 9223372036854775807 && s == -1)
 			return (0);
+		i++;
 	}
 	return (nb * s);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:36:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/11 16:33:54 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:21:00 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 int	main(int argc, char *argv[])
 {
-	t_map	*tmap;
+	t_pmap	*tmap;
+	t_map	map;
 
 	if (argc != 2)
 		return (1);
 	else
 	{
-		tmap = malloc(sizeof(t_map) * 1);
+		tmap = malloc(sizeof(t_pmap) * 1);
 		if (!tmap)
 			ft_error("Error:\n malloc tmap!", 1, 0);
 		tmap->file = argv[1];
 		if (!check_map(tmap))
 			return (1);
-		while (1)
-			;
+		map.tmap = tmap;
+		draw_map(&map);
 	}
 	return (0);
 }
