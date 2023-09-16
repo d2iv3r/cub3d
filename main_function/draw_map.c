@@ -6,11 +6,11 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:02:50 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 23:18:08 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:25:41 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub3d.h"
+#include "../cub3d.h"
 
 void	draw_map(t_map *s)
 {
@@ -26,8 +26,6 @@ void	drawing_img(t_map *map)
 	int	i;
 	int	j;
 
-	// unsigned int color = 0x000000FF;
-	
 	i = -1;
 	while (map->tmap->map[++i])
 	{
@@ -35,24 +33,9 @@ void	drawing_img(t_map *map)
 		while (map->tmap->map[i][++j])
 		{
 			if (map->tmap->map[i][j] == '1')
-				pixels_wall(map, (j * 80) * 0.2, (i * 80) * 0.2);
+				pixels_wall(map, (j * GRID) * MINI_MAP, (i * GRID) * MINI_MAP);
 		}
 	}
-	// i = 0;
-	// j = 0;
-	// while (i < (int)map->weight)
-	// {
-	// 	while (j < (int)map->height)
-	// 	{
-	// 		color = 0x000000FF;
-	// 		if (j >= (int)(map->height / 2))
-	// 			color = 0xFFFFFFFF;
-	// 		mlx_put_pixel(map->img, i, j, color);
-	// 		j++;	
-	// 	}
-	// 	j = 0;
-	// 	i++;
-	// }
 }
 
 void	pixels_wall(t_map *map, int x, int y)
@@ -61,25 +44,45 @@ void	pixels_wall(t_map *map, int x, int y)
 	int	j;
 
 	i = -1;
-	while (++i < 40)
+	while (++i < 20)
 	{
 		j = -1;
-		while (++j < 40)
+		while (++j < 20)
 			mlx_put_pixel(map->img, x + i, y + j, 0xFFFFFF);
 	}
 }
 
 void	pixels_player(t_map *map, float x, float y)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	float	ox;
+	float	oy;
 
 	i = -1;
 	while (++i < 4)
 	{
 		j = -1;
 		while (++j < 4)
-			mlx_put_pixel(map->img, x + i, y + j, 0xFF5733FF);
+		{
+			ox = (x + i + 20) * MINI_MAP;
+			oy = (y + j + 20) * MINI_MAP;
+			mlx_put_pixel(map->img, ox, oy, 0xFF5733FF);
+		}
 	}
 }
 
+void	draw_colome(t_map *s, int i, double w_s)
+{
+	int	start;
+	int	p;
+
+	p = 0;
+	start = (s->height / 2) - (w_s / 2);
+	while (p < w_s)
+	{
+		if ((p + start) > 0 && (p + start) < s->height)
+			mlx_put_pixel(s->img, i, p + start, s->color);
+		p++;
+	}
+}

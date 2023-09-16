@@ -6,11 +6,11 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 23:19:25 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/16 20:59:28 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub3d.h"
+#include "../cub3d.h"
 
 void	handler_moves(void *param)
 {
@@ -28,7 +28,7 @@ void	handler_moves(void *param)
 	cast_rays(s);
 	drawing_img(s);
 	handler_move_view(s);
-	pixels_player(s, s->px * 0.2, s->py * 0.2);
+	pixels_player(s, s->px, s->py);
 	direction_player(s, 20);
 	s->lr_walk = 0;
 	s->ud_walk = 0;
@@ -39,29 +39,21 @@ void	direction_player(t_map *s, float distance)
 {
 	t_point	p;
 	int		i;
-	float	X;
-	float	Y;
+	float	x;
+	float	y;
 
-	p.x2 = s->px + (cos(s->ongl) * distance);
-	p.y2 = s->py + (sin(s->ongl) * distance);
-	p.dx = p.x2 - s->px;
-	p.dy = p.y2 - s->py;
-	if (_abs(p.dy) > _abs(p.dx))
-		p.steps = _abs(p.dy);
-	else
-		p.steps = _abs(p.dx);
-	p.xinc = p.dx / (float)p.steps;
-	p.yinc = p.dy / (float)p.steps;
+	
 	i = -1;
-	X = s->px * 0.2;
-	Y = s->py * 0.2;
+	x = (s->px + 20) * MINI_MAP;
+	y = (s->py + 20) * MINI_MAP;
+	put_line(&p, s, distance);
 	while (++i < p.steps)
 	{
-		if (X >= 0 && X <= (int)s->weight && Y >= 0 && Y <= (int)s->height)
+		if (x >= 0 && x <= s->weight && y >= 0 && y <= s->height)
 		{
-			mlx_put_pixel(s->img, floor(X), floor(Y), 0xFF5733FF);
-			X += p.xinc;
-			Y += p.yinc;
+			mlx_put_pixel(s->img, floor(x), floor(y), 0xFF5733FF);
+			x += p.xinc;
+			y += p.yinc;
 		}
 		else
 			break ;
@@ -82,26 +74,21 @@ void	handler_move_view(t_map *s)
 		s->ongl += (s->lr_view * s->rotation_speed);
 }
 
-void	normalize_angle(t_ray *r)
-{
-	r->ray_angle = remainder(r->ray_angle, 2 * M_PI);
-	if (r->ray_angle < 0)
-		r->ray_angle = (2 * M_PI) + r->ray_angle; 
-}
-
 void	hook(t_map *s)
 {
 	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_ESCAPE))
 		mlx_close_window(s->ptr_mlx);
 	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_A))
 		s->lr_walk = -1;
-	if (mlx_is_key_down(s->ptr_mlx,  MLX_KEY_D))
+	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_D))
 		s->lr_walk = 1;
-	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_W) || mlx_is_key_down(s->ptr_mlx, MLX_KEY_UP))
+	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_W) || \
+		mlx_is_key_down(s->ptr_mlx, MLX_KEY_UP))
 		s->ud_walk = 1;
 	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_UP))
 		s->ud_walk = 1;
-	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_S) || mlx_is_key_down(s->ptr_mlx, MLX_KEY_DOWN))
+	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_S) || \
+		mlx_is_key_down(s->ptr_mlx, MLX_KEY_DOWN))
 		s->ud_walk = -1;
 	if (mlx_is_key_down(s->ptr_mlx, MLX_KEY_LEFT))
 		s->lr_view = -1;
@@ -128,14 +115,4 @@ void	walk_move(t_map *map)
 		x = map->px + cos(map->ongl) * step;
 	}
 	check_wall(map, x, y);
-}
-
-void	check_wall(t_map *map, float x, float y)
-{
-	if (map->tmap->map[(int)floor(y / 80)][(int)floor(x / 80)] != '1' && \
-		 map->tmap->map[(int)floor((y + 4)/ 80)][(int)floor((x + 4)/ 80)] != '1')
-	{
-		map->px = x;
-		map->py = y;
-	}
 }

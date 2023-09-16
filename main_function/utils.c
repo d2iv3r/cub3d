@@ -6,66 +6,11 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:10:11 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 23:26:13 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/16 16:31:06 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-void	player_pos(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	map->px = 0;
-	map->py = 0;
-	while (map->tmap->map[++i])
-	{
-		j = -1;
-		while (map->tmap->map[i][++j])
-		{
-			if (map->tmap->map[i][j] == 'S')
-			{
-				map->px = (j * 80);
-				map->py = (i * 80);
-			}
-		}
-	}
-}
-
-void	put_rays(t_map *s, float angle, double distance)
-{
-	t_point	p;
-	int		i;
-	float	X;
-	float	Y;
-
-	p.x2 = s->px + (cos(angle) * (distance * 0.2));
-	p.y2 = s->py + (sin(angle) * (distance * 0.2));
-	p.dx = p.x2 - s->px;
-	p.dy = p.y2 - s->py;
-	if (_abs(p.dy) > _abs(p.dx))
-		p.steps = _abs(p.dy);
-	else
-		p.steps = _abs(p.dx);
-	p.xinc = p.dx / (float)p.steps;
-	p.yinc = p.dy / (float)p.steps;
-	i = -1;
-	X = s->px * 0.2;
-	Y = s->py * 0.2;
-	while (++i < p.steps)
-	{
-		if (X >= 0 && X <= (int)s->weight && Y >= 0 && Y <= (int)s->height)
-		{
-			mlx_put_pixel(s->img, floor(X), floor(Y), 0xFF5733FF);
-			X += p.xinc;
-			Y += p.yinc;
-		}
-		else
-			break ;
-	}
-}
 
 double	_abs(double c)
 {
@@ -74,40 +19,34 @@ double	_abs(double c)
 	return (c);
 }
 
-void	init_value(t_map *s)
+int	is_wall(t_map *s, float y, float x)
 {
-	init_angle(s);
-	get_space(s);
-	s->ptr_mlx = mlx_init(s->weight, s->height, "cub3d", true);
-	if (!s->ptr_mlx)
-		ft_error("Error\nmlx_init", 1, 0);
-	s->img = mlx_new_image(s->ptr_mlx, s->weight, s->height);
-	if (!s->img)
-		ft_error("Error\nmlx_new_imge", 1, 0);
-	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);
-	if (s->window < 0)
-		ft_error("Error\nmlx_imge_to window", 1, 0);
-	drawing_img(s);
-	player_pos(s);
-	pixels_player(s, s->px * 0.2, s->py * 0.2);
+	if (x < 0)
+		return (1);
+	else if (x > (int)(s->weight))
+		return (1);
+	else if (y < 0)
+		return (1);
+	else if (y > (int)(s->height))
+		return (1);
+	else if (s->tmap->map[(int)floor (y / 80)][(int)floor (x / 80)] == '1')
+		return (1);
+	return (0);
 }
 
-void	init_angle(t_map *s)
+void	check_wall(t_map *map, float x, float y)
 {
-	if (s->tmap->pos == 'S')
-		s->ongl = 90 * (M_PI / 180);
-	if (s->tmap->pos == 'W')
-		s->ongl = 180 * (M_PI / 180);
-	if (s->tmap->pos == 'E')
-		s->ongl = 0;
-	if (s->tmap->pos == 'N')
-		s->ongl = 270 * (M_PI / 180);
-	s->rotation_speed = 2 * (M_PI / 180);
-	s->fov = 60 * (M_PI / 180);
-	s->move_speed = 3;
-	s->lr_view = 0;
-	s->ud_walk = 0;
-	s->lr_walk = 0;
-	s->xv = 0;
-	s->yv = 0;
+	if (map->tmap->map[(int)(y / GRID)][(int)(x / GRID)] != '1' && \
+		map->tmap->map[(int)((y + 4) / GRID)][(int)((x + 4) / GRID)] != '1')
+	{
+		map->px = x;
+		map->py = y;
+	}
+}
+
+void	normalize_angle(t_ray *r)
+{
+	r->ray_angle = remainder(r->ray_angle, 2 * M_PI);
+	if (r->ray_angle < 0)
+		r->ray_angle = (2 * M_PI) + r->ray_angle; 
 }

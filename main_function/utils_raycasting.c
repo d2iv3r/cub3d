@@ -1,47 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mr_cleaner.c                                       :+:      :+:    :+:   */
+/*   utils_raycasting.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/28 13:14:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/15 19:26:09 by mel-harc         ###   ########.fr       */
+/*   Created: 2023/09/16 17:22:34 by mel-harc          #+#    #+#             */
+/*   Updated: 2023/09/16 17:22:58 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	clean_arr2d(char **arr2d)
+void	check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y)
 {
-	int	i;
-
-	if (!arr2d || !*arr2d)
-		return ;
-	i = 0;
-	while (arr2d[i])
+	while (1)
 	{
-		free(arr2d[i]);
-		arr2d[i] = NULL;
-		i++;
+		r->cxh += steps_x;
+		r->cyh += steps_y;
+		if (is_wall(s, r->cyh, r->cxh))
+			break ;
 	}
-	free(arr2d);
-	arr2d = NULL;
 }
 
-void	get_space(t_map *map)
+void	check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y)
 {
-	int	i;
-	int	w;
-
-	i = 0;
-	w = ft_strlen(map->tmap->map[i]);
-	while (map->tmap->map[i])
+	while (1)
 	{
-		if (ft_strlen(map->tmap->map[i]) > (size_t)w)
-			w = ft_strlen(map->tmap->map[i]);
-		i++;
+		r->cxv += steps_x;
+		r->cyv += steps_y;
+		if (is_wall(s, r->cyv, r->cxv))
+			break ;
 	}
-	map->weight = w * 80;
-	map->height = i * 80;
 }
