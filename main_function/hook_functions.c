@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/16 20:59:28 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/16 21:08:42 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	direction_player(t_map *s, float distance)
 	float	x;
 	float	y;
 
-	
 	i = -1;
 	x = (s->px + 20) * MINI_MAP;
 	y = (s->py + 20) * MINI_MAP;
