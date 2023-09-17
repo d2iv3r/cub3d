@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/16 21:00:43 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 12:48:36 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	init_angle(t_map *s)
 		s->ongl = 270 * (M_PI / 180);
 	s->rotation_speed = 2 * (M_PI / 180);
 	s->fov = 60 * (M_PI / 180);
-	s->move_speed = GRID / 15;
+	s->move_speed = GRID / 10;
 	s->lr_view = 0;
 	s->ud_walk = 0;
 	s->lr_walk = 0;
@@ -78,8 +78,8 @@ void	player_pos(t_map *s)
 			if (s->tmap->map[i][j] == 'S' || s->tmap->map[i][j] == 'W' || \
 				s->tmap->map[i][j] == 'E' || s->tmap->map[i][j] == 'N')
 			{
-				s->px = j * 80;
-				s->py = i * 80;
+				s->px = j * GRID;
+				s->py = i * GRID;
 			}
 		}
 	}
