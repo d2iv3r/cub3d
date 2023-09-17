@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/16 20:38:35 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 13:25:14 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@ void	cast_rays(t_map *s)
 	int		i;
 	double	w_s;
 
+	s->tex[N] = mlx_load_png(N_TEX);
+	s->tex[E] = mlx_load_png(E_TEX);
+	s->tex[S] = mlx_load_png(S_TEX);
+	s->tex[W] = mlx_load_png(W_TEX);
+	if (!s->tex[N] || !s->tex[E] || !s->tex[S] || !s->tex[W])
+		exit (1);
 	i = 0;
 	r.ray_angle = s->ongl - (s->fov / 2);
 	while (i < (s->weight))
@@ -25,7 +31,8 @@ void	cast_rays(t_map *s)
 		normalize_angle(&r);
 		w_s = ((s->height / 2) / first_cray(s, &r)) * 500;
 		r.ray_angle += s->fov / s->weight;
-		draw_colome(s, i, w_s);
+		put_tex_colmn(s, i, w_s, r);
+		// draw_colome(s, i, w_s);
 		i++;
 	}
 }
@@ -47,13 +54,15 @@ double	first_cray(t_map *s, t_ray *r)
 	{
 		dis = dis_h;
 		s->color = 0x00FF00FF;
+		r->hith = 1;
 	}
 	else if (dis_h > dis_v)
 	{
 		dis = dis_v;
 		s->color = 0x0000FFFF;
+		r->hith = 0;
 	}
-	return (dis * cos(s->ongl - r->ray_angle)); 
+	return (dis * cos(s->ongl - r->ray_angle));
 }
 
 void	raycating_vertical(t_map *s, t_ray *r)

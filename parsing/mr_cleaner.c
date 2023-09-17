@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mr_cleaner.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 13:14:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/15 19:26:09 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 11:25:06 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,6 @@ void	get_space(t_map *map)
 			w = ft_strlen(map->tmap->map[i]);
 		i++;
 	}
-	map->weight = w * 80;
-	map->height = i * 80;
+	map->weight = w * GRID;
+	map->height = i * GRID;
 }
