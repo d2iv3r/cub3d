@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/17 15:44:36 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/17 15:55:00 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # include "libft/libft.h"
 
 # define GRID 64
+# define ROWS 15
+# define COLUMNS 30
 # define MINI_MAP 0.2
 
 # define N 0

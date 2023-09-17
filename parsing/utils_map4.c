@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 14:51:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/17 15:44:10 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/17 15:51:43 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_mapcharacters(char c)
 int	is_identifier(char *id)
 {
 	if (ft_strcmp(id, "NO") && ft_strcmp(id, "SO") && ft_strcmp(id, "WE")
-		&& ft_strcmp(id, "EA") && ft_strcmp(id, "c") && ft_strcmp(id, "F"))
+		&& ft_strcmp(id, "EA") && ft_strcmp(id, "C") && ft_strcmp(id, "F"))
 		return (0);
 	return (1);
 }

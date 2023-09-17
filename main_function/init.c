@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/17 11:49:07 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/17 15:57:58 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,16 @@ void	init_angle(t_map *s)
 	s->lr_view = 0;
 	s->ud_walk = 0;
 	s->lr_walk = 0;
+	s->height = ROWS * GRID;
+	s->weight = COLUMNS * GRID;
+	if (ROWS > 24 || COLUMNS > 40)
+		ft_error("Error\n", 1, 0);
 }
 
 void	init_value(t_map *s)
 {
 	init_angle(s);
-	get_space(s);
+	// get_space(s);
 	s->ptr_mlx = mlx_init(s->weight, s->height, "cub3d", true);
 	if (!s->ptr_mlx)
 		ft_error("Error\nmlx_init", 1, 0);
