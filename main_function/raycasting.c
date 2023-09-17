@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/17 11:37:08 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:26:00 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	raycating_vertical(t_map *s, t_ray *r)
 	steps_y = 0;
 	if (r->ray_angle >= (M_PI / 2) && r->ray_angle <= (1.5 * M_PI))
 	{
-		r->cxv = floor(s->px / GRID) * GRID - 0.00008;
+		r->cxv = floor(s->px / GRID) * GRID - 0.0008;
 		r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
 		if (is_wall(s, r->cyv, r->cxv))
 			return ;
@@ -102,7 +102,7 @@ void	raycating_horizontal(t_map *s, t_ray *r)
 	}
 	else if (r->ray_angle >= M_PI)
 	{
-		r->cyh = floor(s->py / GRID) * GRID - 0.00008;
+		r->cyh = floor(s->py / GRID) * GRID - 0.0008;
 		r->cxh = s->px + ((r->cyh - s->py) / tan(r->ray_angle));
 		if (is_wall(s, r->cyh, r->cxh))
 			return ;

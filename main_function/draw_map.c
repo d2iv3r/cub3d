@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:02:50 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/17 13:25:02 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:30:01 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,10 @@ void	pixels_wall(t_map *map, int x, int y)
 	{
 		j = -1;
 		while (++j < 20)
-			mlx_put_pixel(map->img, x + i, y + j, 0xFFFFFF);
+		{
+			if ((x + i) <= map->weight && (y + j) <= map->height)
+				mlx_put_pixel(map->img, x + i, y + j, 0xFFFFFF);
+		}
 	}
 }
 

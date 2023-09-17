@@ -12,7 +12,7 @@ SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
 mlx = /Users/mel-harc/MLX42/build/libmlx42.a
 
-# SEGS = -Wuninitialized -fsanitize=address,undefined,integer -g
+SEGS = -Wuninitialized -fsanitize=address,undefined,integer -g
 
 LIBFT = libft/ft_strrchr.c libft/ft_strncmp.c libft/ft_split.c libft/ft_substr.c libft/ft_isalpha.c\
 		libft/ft_strdup.c libft/ft_strlen.c libft/ft_memcpy.c libft/ft_memset.c libft/ft_isdigit.c\

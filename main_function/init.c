@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/17 12:48:36 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:38:20 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ void	init_angle(t_map *s)
 	s->lr_view = 0;
 	s->ud_walk = 0;
 	s->lr_walk = 0;
+	s->ptr_mlx = NULL;
+	s->window = 0;
+	s->img = NULL;
 }
 
 void	init_value(t_map *s)
