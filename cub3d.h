@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/17 15:24:52 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 16:16:30 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,33 @@
 # include "libft/libft.h"
 
 # define GRID 64
+# define ROWS 15
+# define COLUMNS 30
 # define MINI_MAP 0.2
+
+# define N 0
+# define E 1
+# define S 2
+# define W 3
+
+///////////////////64*64///////////////////
+# define N_TEX "textures/northTexture.png"
+# define E_TEX "textures/eastTexture.png"
+# define S_TEX "textures/southTexture.png"
+# define W_TEX "textures/westTexture.png"
+
+/////////////////128*128///////////////////
+// # define N_TEX "../textures/Bricks_01.png"
+// # define E_TEX "../textures/chessBoard.png"
+// # define S_TEX "../textures/Tile_20.png"
+// # define W_TEX "../textures/Tile_16.png"
+
+////////////////2048*2048///////////////////
+// # define N_TEX "../textures/BrickWallBlue.png"
+// # define E_TEX "../textures/BrickWallPurple.png"
+// # define S_TEX "../textures/redBricksWall.png"
+// # define W_TEX "../textures/BrickWallGrey.png"
+
 
 typedef struct s_element
 {
@@ -41,7 +67,7 @@ typedef struct s_pmap
 	char		pos;
 	int			x;
 	int			y;
-}			t_pmap;
+}	t_pmap;
 
 typedef struct s_map
 {
@@ -58,10 +84,15 @@ typedef struct s_map
 	int				ud_walk;
 	int				lr_view;
 	double			move_speed;
-	double			rotation_speed;	
+	double			rotation_speed;
 	double			fov;
 	float			distance;
 	unsigned int	color;
+	mlx_texture_t	*tex[4];
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	unsigned int	a;
 }	t_map;
 
 typedef struct s_point
@@ -85,6 +116,7 @@ typedef struct s_ray
 	float		cyv;
 	float		cxv;
 	double		ray_angle;
+	int			hith;
 }	t_ray;
 
 // main
@@ -117,7 +149,7 @@ void	direction_player(t_map *s, float distance);
 void	put_line(t_point *p, t_map *s, float distance);
 void	check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y);
 void	check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y);
-void	draw_colome(t_map *s, int i, double w_s);
+// void	draw_colome(t_map *s, int i, double w_s);
 
 //	UTILS MAP
 char	*ft_read_file(int fd);
@@ -131,5 +163,8 @@ int		ft_error(char *str, int ex, int ret);
 void	clean_arr2d(char **arr2d);
 int		check_map(t_pmap *tmap);
 int		closed_map(t_pmap tmap);
+void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray);
+int		is_mapcharacters(char c);
+int		is_identifier(char *id);
 
 #endif

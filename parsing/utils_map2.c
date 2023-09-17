@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:15:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/13 15:08:05 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/17 15:46:56 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ char	**get_elements(char *s)
 	if (!allmap)
 		return (NULL);
 	if (num_lines(allmap) < 6)
-		ft_error("Error:\n Invalid map!", 1, 0);
+		ft_error("Error:\nInvalid map!", 1, 0);
 	len = 6;
 	elem = malloc(sizeof(char *) * (len + 1));
 	if (!elem)
-		return (ft_error("Error:\n malloc elem!", 1, 0), NULL);
+		return (ft_error("Error:\nmalloc elem!", 1, 0), NULL);
 	i = 0;
 	while (i < len)
 	{
@@ -76,15 +76,17 @@ t_element	*init_telem(char *map)
 
 	elem = get_elements(map);
 	if (!elem)
-		ft_error("Error\nInvalid elements!", 1, 0);
+		ft_error("Error:\nInvalid elements!", 1, 0);
 	telem = malloc (sizeof(t_element) * 7);
 	if (!telem)
-		ft_error("\n malloc telem!", 1, 0);
+		ft_error("Error:\nmalloc telem!", 1, 0);
 	i = 0;
 	while (i < 6)
 	{
 		telem[i].id = get_iden(elem[i]);
 		telem[i].info = get_info(elem[i]);
+		if (!is_identifier(telem[i].id))
+			ft_error("Error:\nInvalid Identifier!", 1, 0);
 		i++;
 	}
 	telem[i].id = NULL;
@@ -131,12 +133,12 @@ void	init_tmap(t_pmap *tmap)
 
 	s = ft_read_file(tmap->fd);
 	if (!s)
-		ft_error("Error\nReading map file\n", 1, 0);
+		ft_error("Error:\nReading map file\n", 1, 0);
 	tmap->elem = init_telem(s);
 	tmp = ft_strnstr(s, tmap->elem[5].info, ft_strlen(s))
 		+ ft_strlen(tmap->elem[5].info);
 	if (!tmp)
-		ft_error("Error:\n Invalid map!", 1, 0);
+		ft_error("Error:\nInvalid map!", 1, 0);
 	i = 0;
 	while (tmp[i] && tmp[i] == '\n')
 		i++;
