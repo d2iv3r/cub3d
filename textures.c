@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:23:41 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/17 14:35:33 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/18 20:54:33 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray)
 	i = 0;
 	while (i < w_s)
 	{
-		yt = i * ((float)s->tex[p]->height / w_s);
-		s->r = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt)];
-		s->g = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 1)];
-		s->b = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 2)];
-		s->a = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 3)];
-		s->color = get_color(s->r, s->g, s->b, s->a);
-		if (i + y >= 0 && i + y < (int)s->height && x > 0 && x < (int)s->weight)
-			mlx_put_pixel(s->img, x, y + i, s->color);
+		if (y + i > 0 && i + y < s->height)
+		{
+			yt = i * ((float)s->tex[p]->height / w_s);
+			s->r = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt)];
+			s->g = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 1)];
+			s->b = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 2)];
+			s->a = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 3)];
+			s->color = get_color(s->r, s->g, s->b, s->a);
+			if (i + y >= 0 && i + y <= s->height && x > 0 && x <= s->weight)
+				mlx_put_pixel(s->img, x, y + i, s->color);
+		}
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/17 16:44:20 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/18 22:09:43 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	init_angle(t_map *s)
 	s->lr_view = 0;
 	s->ud_walk = 0;
 	s->lr_walk = 0;
-	s->height = ROWS * GRID;
-	s->weight = COLUMNS * GRID;
+	s->height = 14 * GRID;
+	s->weight = 26 * GRID;
 	if (ROWS > 24 || COLUMNS > 40)
 		ft_error("Error\n", 1, 0);
 }

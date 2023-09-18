@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:48:11 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/17 15:34:05 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/13 16:14:59 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int	check_colors(t_pmap tmap)
 	int		i;
 	char	**tmp;
 
-	i = -1;
-	while (tmap.elem[++i].id)
+	i = 0;
+	while (tmap.elem[i++].id)
 	{
 		if (!ft_strcmp(tmap.elem[i].id, "C")
 			|| !ft_strcmp(tmap.elem[i].id, "F"))
@@ -78,30 +78,34 @@ int	check_colors(t_pmap tmap)
 	return (1);
 }
 
-int	check_characters(t_pmap *t)
+int	check_characters(t_pmap *tmap)
 {
+	int	i;
+	int	j;
 	int	p;
 
-	t->y = 0;
+	i = 0;
 	p = 0;
-	while (t->map[t->y])
+	while (tmap->map[i])
 	{
-		t->x = 0;
-		while (t->map[t->y][t->x])
+		j = 0;
+		while (tmap->map[i][j])
 		{
-			if (!is_mapcharacters(t->map[t->y][t->x]) || p > 1)
+			if (tmap->map[i][j] != '0' && tmap->map[i][j] != '1' && tmap->map[i][j] != 'N'
+				&& tmap->map[i][j] != 'S' && tmap->map[i][j] != 'E' && tmap->map[i][j] != 'W'
+				&& tmap->map[i][j] != ' ')
 				return (0);
-			if (t->map[t->y][t->x] == 'N' || t->map[t->y][t->x] == 'S'
-				|| t->map[t->y][t->x] == 'E' || t->map[t->y][t->x] == 'W')
+			if (tmap->map[i][j] == 'N' || tmap->map[i][j] == 'S' || tmap->map[i][j] == 'E'
+				|| tmap->map[i][j] == 'W')
 			{
-				t->pos = t->map[t->y][t->x];
+				tmap->pos = tmap->map[i][j];
 				p++;
 			}
-			t->x++;
+			j++;
 		}
-		t->y++;
+		i++;
 	}
-	if (p == 0)
+	if (p > 1 || p == 0)
 		return (0);
 	return (1);
 }
