@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/18 22:27:56 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/19 10:55:24 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	handler_moves(void *param)
 	s = (t_map *)param;
 	hook(s);
 	mlx_delete_image(s->ptr_mlx, s->img);
-	s->img = mlx_new_image(s->ptr_mlx, s->weight, s->height);
+	s->img = mlx_new_image(s->ptr_mlx, COLUMS * GRID, ROWS * GRID);
 	if (!s->img)
 		ft_error("Error\nmlx_new_imge", 1, 0);
 	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);

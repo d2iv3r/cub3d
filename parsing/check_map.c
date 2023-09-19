@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:48:11 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/19 10:12:58 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/19 10:50:45 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int	check_map(t_pmap *tmap)
 		ft_error("Error:\n Invalid characters in the map!", 1, 0);
 	if (!closed_map(*tmap))
 		ft_error("Error:\n The map isn't closed!", 1, 0);
-	tmap->rows = num_lines(tmap->map);
-	tmap->columns = get_long_line(tmap->map);
+	tmap->rows = num_lines(tmap->map) * GRID;
+	tmap->colums = get_long_line(tmap->map) * GRID;
 	return (1);
 }

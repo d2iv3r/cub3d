@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:02:50 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/18 22:27:46 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/19 10:58:35 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,20 +70,5 @@ void	pixels_player(t_map *map, float x, float y)
 			if (ox >= 0 && ox <= map->weight && oy >= 0 && oy <= map->height)
 				mlx_put_pixel(map->img, ox, oy, 0xFF5733FF);
 		}
-	}
-}
-
-void	draw_colome(t_map *s, int i, double w_s)
-{
-	int	start;
-	int	p;
-
-	p = 0;
-	start = (s->height / 2) - (w_s / 2);
-	while (p < w_s)
-	{
-		if ((p + start) > 0 && (p + start) < s->height)
-			mlx_put_pixel(s->img, i, p + start, s->color);
-		p++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/18 22:09:43 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/19 11:03:02 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,17 @@ void	init_angle(t_map *s)
 	s->lr_view = 0;
 	s->ud_walk = 0;
 	s->lr_walk = 0;
-	s->height = 14 * GRID;
-	s->weight = 26 * GRID;
-	if (ROWS > 24 || COLUMNS > 40)
-		ft_error("Error\n", 1, 0);
+	s->weight = s->tmap->colums;
+	s->height = s->tmap->rows;
 }
 
 void	init_value(t_map *s)
 {
 	init_angle(s);
-	s->ptr_mlx = mlx_init(s->weight, s->height, "cub3d", true);
+	s->ptr_mlx = mlx_init(COLUMS * GRID, ROWS * GRID, "cub3d", true);
 	if (!s->ptr_mlx)
 		ft_error("Error\nmlx_init", 1, 0);
-	s->img = mlx_new_image(s->ptr_mlx, s->weight, s->height);
+	s->img = mlx_new_image(s->ptr_mlx, COLUMS * GRID, ROWS * GRID);
 	if (!s->img)
 		ft_error("Error\nmlx_new_imge", 1, 0);
 	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);
