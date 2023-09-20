@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/19 17:40:40 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 21:34:59 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_angle(t_map *s)
 	if (s->tmap->pos == 'S')
 		s->ongl = 90 * (M_PI / 180);
 	if (s->tmap->pos == 'W')
-		s->ongl = 180 * (M_PI / 180);
+		s->ongl = M_PI;
 	if (s->tmap->pos == 'E')
 		s->ongl = 0;
 	if (s->tmap->pos == 'N')

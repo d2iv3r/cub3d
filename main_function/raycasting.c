@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 12:04:25 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:59:10 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,21 @@ void	cast_rays(t_map *s)
 {
 	t_ray	r;
 	int		i;
-	double	w_s;
+	double	ws;
+	double	dis;
 
 	i = 0;
-	s->tex[N] = mlx_load_png(N_TEX);
-	s->tex[E] = mlx_load_png(E_TEX);
-	s->tex[S] = mlx_load_png(S_TEX);
-	s->tex[W] = mlx_load_png(W_TEX);
-	if (!s->tex[N] || !s->tex[E] || !s->tex[S] || !s->tex[W])
-		exit (1);
+	ws = 0;
 	r.ray_angle = s->ongl - (s->fov / 2);
+	load_textures_c(s);
 	while (i < COLUMS)
 	{
 		normalize_angle(&r);
-		w_s = (530 / first_cray(s, &r)) * 100;
+		dis = first_cray(s, &r);
+		if ((int)dis != 0)
+			ws = (530 / dis) * 100;
 		r.ray_angle += s->fov / COLUMS;
-		put_tex_colmn(s, i, w_s, r);
+		put_tex_colmn(s, i, ws, r);
 		i++;
 	}
 }
@@ -42,36 +41,29 @@ double	first_cray(t_map *s, t_ray *r)
 	double	dis_v;
 	double	dis;
 
-	dis_h = 0;
-	dis_v = 0;
+	dis_h = -1;
+	dis_v = -1;
 	dis = 0;
-	raycating_horizontal(s, r);
-	raycating_vertical(s, r);
-	dis_h = sqrt(pow(r->cxh - s->px, 2) + pow(r->cyh - s->py, 2));
-	dis_v = sqrt(pow(r->cxv - s->px, 2) + pow(r->cyv - s->py, 2));
-	if (dis_h < dis_v)
+	if (r->ray_angle != 0 && r->ray_angle != M_PI)
+	{
+		raycating_horizontal(s, r);
+		dis_h = sqrt(pow(r->cxh - s->px, 2) + pow(r->cyh - s->py, 2));
+	}
+	if (r->ray_angle != (1.5 * M_PI) && r->ray_angle != (M_PI / 2))
+	{
+		raycating_vertical(s, r);
+		dis_v = sqrt(pow(r->cxv - s->px, 2) + pow(r->cyv - s->py, 2));
+	}
+	if (dis_h != -1 && dis_h < dis_v)
 	{
 		dis = dis_h;
 		r->hith = 1;
 	}
-	else if (dis_h > dis_v)
+	else if (dis_v != -1 && dis_h > dis_v)
 	{
 		dis = dis_v;
 		r->hith = 0;
 	}
-	// else if (dis_h == dis_v)
-	// {
-	// 	if (s->tmap->map[(int)((r->cyv - 2) / GRID)][(int)(r->cxv / GRID)] == '1')
-	// 	{
-	// 		puts("a");
-	// 		r->hith = 0;
-	// 	}
-	// 	else
-	// 	{
-	// 		puts("b");
-	// 		r->hith = 1;
-	// 	}
-	// }
 	return (dis * cos(s->ongl - r->ray_angle));
 }
 

@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:10:11 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/19 18:34:09 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 23:38:04 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	check_wall(t_map *map, float x, float y)
 {
 	if (x <= 0 || x >= map->weight || y <= 0 || y >= map->height)
 		return ;
-	if ((x + 30) <= 0 || (x + 30) >= map->weight || (y + 30) <= 0 || (y + 30)  >= map->height)
+	if ((x + 20) <= 0 || (x + 20) >= map->weight || (y + 20) <= 0 || (y + 20)  >= map->height)
 		return ;
-	if (map->tmap->map[(int)((y + 30) / GRID)][(int)((x + 30) / GRID)] == '1')
+	if (map->tmap->map[(int)((y + 10) / GRID)][(int)((x + 10) / GRID)] == '1')
 		return ;
 	if (map->tmap->map[(int)floor (y / GRID)][(int)floor (x / GRID)] != '1')
 	{

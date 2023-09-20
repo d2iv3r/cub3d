@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/20 11:46:52 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 22:59:26 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@
 # define W 3
 
 ///////////////////64*64///////////////////
-# define N_TEX "textures/northTexture.png"
-# define E_TEX "textures/eastTexture.png"
-# define S_TEX "textures/southTexture.png"
-# define W_TEX "textures/westTexture.png"
+// # define N_TEX "textures/northTexture.png"
+// # define E_TEX "textures/eastTexture.png"
+// # define S_TEX "textures/southTexture.png"
+// # define W_TEX "textures/westTexture.png"
 
 /////////////////128*128///////////////////
-// # define N_TEX "textures/Bricks_01.png"
-// # define E_TEX "textures/chessBoard.png"
-// # define S_TEX "textures/Tile_20.png"
-// # define W_TEX "textures/Tile_16.png"
+# define N_TEX "textures/Bricks_01.png"
+# define E_TEX "textures/chessBoard.png"
+# define S_TEX "textures/Tile_20.png"
+# define W_TEX "textures/Tile_16.png"
 
 ////////////////2048*2048///////////////////
 // # define N_TEX "textures/BrickWallBlue.png"
@@ -88,11 +88,9 @@ typedef struct s_map
 	double			fov;
 	float			distance;
 	unsigned int	color;
+	unsigned int	cc;
+	unsigned int	fc;
 	mlx_texture_t	*tex[4];
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-	unsigned int	a;
 }	t_map;
 
 typedef struct s_point
@@ -161,5 +159,6 @@ char		*ft_read_file(int fd);
 int			num_lines(char **arr);
 void		clean_arr2d(char **arr2d);
 void		put_tex_colmn(t_map *s, int x, double w_s, t_ray ray);
+void		load_textures_c(t_map *s);
 
 #endif
