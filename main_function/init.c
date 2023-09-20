@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/19 11:03:02 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/19 17:40:40 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,10 @@ void	init_angle(t_map *s)
 void	init_value(t_map *s)
 {
 	init_angle(s);
-	s->ptr_mlx = mlx_init(COLUMS * GRID, ROWS * GRID, "cub3d", true);
+	s->ptr_mlx = mlx_init(COLUMS, ROWS, "cub3d", true);
 	if (!s->ptr_mlx)
 		ft_error("Error\nmlx_init", 1, 0);
-	s->img = mlx_new_image(s->ptr_mlx, COLUMS * GRID, ROWS * GRID);
-	if (!s->img)
-		ft_error("Error\nmlx_new_imge", 1, 0);
-	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);
-	if (s->window < 0)
-		ft_error("Error\nmlx_imge_to window", 1, 0);
-	drawing_img(s);
 	player_pos(s);
-	pixels_player(s, s->px, s->py);
 }
 
 void	put_line(t_point *p, t_map *s, float distance)
