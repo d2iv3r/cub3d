@@ -4,13 +4,13 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 
-L = -L/Users/mel-harc/.brew/Cellar/glfw/3.3.8/lib
+L = -L/Users/efarhat/.brew/Cellar/glfw/3.3.8/lib
 
-I = -I/Users/mel-harc/.brew/Cellar/glfw/3.3.8/include/GLFW
+I = -I/Users/efarhat/.brew/Cellar/glfw/3.3.8/include/GLFW
 
-SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw 
+SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
-mlx = /Users/mel-harc/MLX42/build/libmlx42.a
+mlx = /Users/efarhat/Desktop/MLX42/build/libmlx42.a
 
 SEGS = -Wuninitialized -fsanitize=address,undefined,integer -g
 
@@ -19,12 +19,13 @@ LIBFT = libft/ft_strrchr.c libft/ft_strncmp.c libft/ft_split.c libft/ft_substr.c
 		libft/ft_atoi.c libft/ft_strcmp.c libft/ft_strchr.c libft/ft_strnstr.c libft/ft_isempty.c\
 		libft/ft_strlcpy.c libft/get_long_line.c
 
+PARS = parsing/check_map.c parsing/get_elements.c parsing/check_elements.c\
+		parsing/utils_map.c parsing/utils.c parsing/mr_cleaner.c
 
-UTILS = parsing/utils_map.c parsing/utils_map2.c parsing/mr_cleaner.c parsing/utils_map3.c \
-		main_function/draw_map.c main_function/hook_functions.c main_function/utils.c \
+UTILS = main_function/draw_map.c main_function/hook_functions.c main_function/utils.c \
 		main_function/raycasting.c main_function/utils_raycasting.c main_function/init.c\
 
-SRC = $(LIBFT) $(UTILS) cub3d.c parsing/check_map.c textures.c
+SRC = $(LIBFT) $(UTILS) $(PARS) cub3d.c textures.c
 
 OBJ = $(SRC:.c=.o)
 

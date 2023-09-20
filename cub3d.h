@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/19 16:10:58 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:15:29 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct s_map
 	int				ud_walk;
 	int				lr_view;
 	double			move_speed;
-	double			rotation_speed;	
+	double			rotation_speed;
 	double			fov;
 	float			distance;
 	unsigned int	color;
@@ -151,20 +151,15 @@ void	check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y);
 void	check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y);
 void	draw_colome(t_map *s, int i, double w_s);
 
-//	UTILS MAP
-char	*ft_read_file(int fd);
-char	*remove_empty(char *s);
-void	init_tmap(t_pmap *tmap);
-void	check_empty_lines(char *s);
-int		num_lines(char **arr);
-char	*get_iden(char *s);
-char	*get_info(char *s);
-int		ft_error(char *str, int ex, int ret);
-void	clean_arr2d(char **arr2d);
-int		check_map(t_pmap *tmap);
-int		closed_map(t_pmap tmap);
-void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray);
-int		is_mapcharacters(char c);
-int		is_identifier(char *id);
+int			check_map(t_pmap *tmap);
+t_element	*init_telem(char *map);
+void		check_elements(t_pmap *tmap);
+void		get_map(t_pmap *tmap, char *s);
+//		UTILS		//
+int			ft_error(char *str, int ex, int ret);
+char		*ft_read_file(int fd);
+int			num_lines(char **arr);
+void		clean_arr2d(char **arr2d);
+void		put_tex_colmn(t_map *s, int x, double w_s, t_ray ray);
 
 #endif

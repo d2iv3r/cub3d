@@ -1,88 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_map.c                                        :+:      :+:    :+:   */
+/*   utils_map3.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 15:42:35 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/13 14:47:37 by mel-harc         ###   ########.fr       */
+/*   Created: 2023/09/11 16:48:09 by efarhat           #+#    #+#             */
+/*   Updated: 2023/09/18 11:38:41 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int	ft_strlen_gnl(char *s)
-{
-	int	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	while (s[i] != '\0')
-	{
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_strjoin_gnl(char *s, char *buff)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	if (!s)
-	{
-		s = (char *)malloc(1 * sizeof(char));
-		if (!s)
-			return (NULL);
-		s[0] = '\0';
-	}
-	if (!buff)
-		return (NULL);
-	str = malloc(sizeof(char) * ((ft_strlen_gnl(s) + ft_strlen_gnl(buff)) + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	j = 0;
-	while (s[++i] != '\0')
-		str[i] = s[i];
-	while (buff[j] != '\0')
-		str[i++] = buff[j++];
-	str[ft_strlen_gnl(s) + ft_strlen_gnl(buff)] = '\0';
-	free(s);
-	return (str);
-}
-
-char	*ft_read_file(int fd)
-{
-	char		*s;
-	char		*buff;
-	int			rdd;
-
-	if (fd == -1)
-		return (0);
-	rdd = 1;
-	s = NULL;
-	buff = malloc(sizeof(char) * 2);
-	if (!buff)
-		return (NULL);
-	while (rdd > 0)
-	{
-		rdd = read(fd, buff, 1);
-		if (rdd == -1)
-		{
-			if (s)
-				free(s);
-			return (free(buff), NULL);
-		}
-		buff[rdd] = '\0';
-		s = ft_strjoin_gnl(s, buff);
-	}
-	free(buff);
-	return (s);
-}
 
 int	map_len(char *s)
 {
@@ -104,31 +32,78 @@ int	map_len(char *s)
 	return (len);
 }
 
-char	*remove_empty(char *s)
+void	check_empty_lines(char *s)
 {
-	int		i;
-	char	*res;
-	int		len;
+	int	i;
 
 	i = 0;
-	len = 0;
-	res = malloc(map_len(s) * sizeof(char) + 1);
-	if (!res)
-		exit(1);
-	i = 0;
-	len = 0;
 	while (s[i])
 	{
-		if (is_empty(s[i]) && (s[i + 1] && is_empty(s[i + 1])))
-			i++;
-		else
-		{
-			res[len] = s[i];
-			len++;
-			i++;
-		}
+		if (s[i] == '\n' && (s[i + 1] && s[i + 1] == '\n'))
+			ft_error("Error:\n Map must not separated by empty lines!", 1, 0);
+		i++;
 	}
-	res[len] = 0;
+}
+
+int	num_lines(char **arr)
+{
+	int	i;
+
+	if (!arr || !*arr)
+		return (0);
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+void	get_pmap(char **map, t_pmap *tmap)
+{
+	int		i;
+	size_t	ll;
+	size_t	j;
+
+	tmap->map = malloc(sizeof(char *) * (num_lines(map) + 1));
+	if (!tmap->map)
+		ft_error("Error: malloc tmap->map!", 1, 0);
+	i = 0;
+	ll = get_long_line(map);
+	while (map[i])
+	{
+		tmap->map[i] = malloc(sizeof(char) * (ll + 1));
+		if (!tmap->map[i])
+			ft_error("Error:\n malloc tmap->map[i]!", 1, 0);
+		ft_strlcpy(tmap->map[i], map[i], ft_strlen(map[i]) + 1);
+		j = ft_strlen(map[i]);
+		while (j < ll)
+		{
+			tmap->map[i][j] = ' ';
+			j++;
+		}
+		tmap->map[i][ll] = 0;
+		i++;
+	}
+	tmap->map[i] = NULL;
+}
+
+void	get_map(t_pmap *tmap, char *s)
+{
+	char	*tmp;
+	char	**map;
+	int		i;
+
+	tmp = ft_strnstr(s, tmap->elem[5].info, ft_strlen(s))
+		+ ft_strlen(tmap->elem[5].info);
+	if (!tmp)
+		ft_error("Error:\nInvalid map!", 1, 0);
+	i = 0;
+	while (tmp[i] && tmp[i] == '\n')
+		i++;
+	check_empty_lines(tmp + i);
+	map = ft_split(tmp + i, '\n');
+	if (!map || !*map)
+		ft_error("Error:\n Invalid map!", 1, 0);
 	free(s);
-	return (res);
+	get_pmap(map, tmap);
+	clean_arr2d(map);
 }

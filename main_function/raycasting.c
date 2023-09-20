@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 10:56:03 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:05:07 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ double	first_cray(t_map *s, t_ray *r)
 	// 		r->hith = 1;
 	// 	}
 	// }
-	return (dis * cos(s->ongl - r->ray_angle)); 
+	return (dis * cos(s->ongl - r->ray_angle));
 }
 
 void	raycating_vertical(t_map *s, t_ray *r)
