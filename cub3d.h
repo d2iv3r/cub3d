@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/20 11:15:29 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/20 11:48:58 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,9 @@ typedef struct s_map
 	double			fov;
 	float			distance;
 	unsigned int	color;
+	unsigned int	cc;
+	unsigned int	fc;
 	mlx_texture_t	*tex[4];
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
-	unsigned int	a;
 }	t_map;
 
 typedef struct s_point
@@ -161,5 +159,6 @@ char		*ft_read_file(int fd);
 int			num_lines(char **arr);
 void		clean_arr2d(char **arr2d);
 void		put_tex_colmn(t_map *s, int x, double w_s, t_ray ray);
+void		load_textures_c(t_map *s);
 
 #endif

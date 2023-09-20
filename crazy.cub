@@ -1,10 +1,10 @@
-NO textures/northTexture.png
+NO textures/Bricks_01.png
 
-SO textures/southTexture.png
+SO textures/Tile_20.png
 
-WE textures/westTexture.png
+WE textures/Tile_16.png
 
-EA textures/eastTexture.png
+EA textures/chessBoard.png
 
 F 81,41,28
 

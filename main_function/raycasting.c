@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 11:05:07 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/20 11:48:51 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,8 @@ void	cast_rays(t_map *s)
 	double	w_s;
 
 	i = 0;
-	s->tex[N] = mlx_load_png(N_TEX);
-	s->tex[E] = mlx_load_png(E_TEX);
-	s->tex[S] = mlx_load_png(S_TEX);
-	s->tex[W] = mlx_load_png(W_TEX);
-	if (!s->tex[N] || !s->tex[E] || !s->tex[S] || !s->tex[W])
-		exit (1);
 	r.ray_angle = s->ongl - (s->fov / 2);
+	load_textures_c(s);
 	while (i < COLUMS)
 	{
 		normalize_angle(&r);

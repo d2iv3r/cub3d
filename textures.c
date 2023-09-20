@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:23:41 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/19 18:50:27 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 11:53:07 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,47 @@ unsigned int	get_color(unsigned int r, unsigned int g,
 	unsigned int b, unsigned int a)
 {
 	return (r << 24 | g << 16 | b << 8 | a);
+}
+
+void	get_rgb(t_map *s, int p, int yt, int xt)
+{
+	int	r;
+	int	g;
+	int	b;
+	int	a;
+
+	r = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt)];
+	g = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 1)];
+	b = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 2)];
+	a = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 3)];
+	s->color = get_color(r, g, b, a);
+}
+
+void	load_textures_c(t_map *s)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		if (!ft_strcmp(s->tmap->elem[i].id, "NO"))
+			s->tex[N] = mlx_load_png(s->tmap->elem[i].info);
+		else if (!ft_strcmp(s->tmap->elem[i].id, "EA"))
+			s->tex[E] = mlx_load_png(s->tmap->elem[i].info);
+		else if (!ft_strcmp(s->tmap->elem[i].id, "SO"))
+			s->tex[S] = mlx_load_png(s->tmap->elem[i].info);
+		else if (!ft_strcmp(s->tmap->elem[i].id, "WE"))
+			s->tex[W] = mlx_load_png(s->tmap->elem[i].info);
+		else if (!ft_strcmp(s->tmap->elem[i].id, "F"))
+			s->cc = get_color(s->tmap->elem[i].color[0],
+					s->tmap->elem[i].color[1], s->tmap->elem[i].color[2], 255);
+		else if (!ft_strcmp(s->tmap->elem[i].id, "C"))
+			s->fc = get_color(s->tmap->elem[i].color[0],
+					s->tmap->elem[i].color[1], s->tmap->elem[i].color[2], 255);
+		i++;
+	}
+	if (!s->tex[N] || !s->tex[E] || !s->tex[S] || !s->tex[W])
+		ft_error("Error:\nLoading the textures!", 1, 0);
 }
 
 int	get_pos(t_ray ray)
@@ -67,11 +108,7 @@ void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray)
 		if (y + i > 0 && i + y < ROWS)
 		{
 			yt = i * ((float)s->tex[p]->height / w_s);
-			s->r = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt)];
-			s->g = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 1)];
-			s->b = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 2)];
-			s->a = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 3)];
-			s->color = get_color(s->r, s->g, s->b, s->a);
+			get_rgb(s, p, xt, yt);
 			if (i + y >= 0 && i + y <= ROWS && x > 0 && x <= COLUMS)
 				mlx_put_pixel(s->img, x, y + i, s->color);
 		}
