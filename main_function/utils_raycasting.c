@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 17:22:34 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/16 17:22:58 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:04:10 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ void	check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y)
 		r->cxh += steps_x;
 		r->cyh += steps_y;
 		if (is_wall(s, r->cyh, r->cxh))
+		{
+			if (r->ray_angle >= M_PI)
+				r->cyh += 0.0008;
 			break ;
+		}
 	}
 }
 
@@ -30,6 +34,10 @@ void	check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y)
 		r->cxv += steps_x;
 		r->cyv += steps_y;
 		if (is_wall(s, r->cyv, r->cxv))
+		{
+			if (r->ray_angle >= (M_PI / 2) && r->ray_angle <= (1.5 * M_PI))
+				r->cxv += 0.0008;
 			break ;
+		}
 	}
 }

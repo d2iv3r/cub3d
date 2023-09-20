@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/20 11:15:29 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/20 11:46:52 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@
 # define W_TEX "textures/westTexture.png"
 
 /////////////////128*128///////////////////
-// # define N_TEX "../textures/Bricks_01.png"
-// # define E_TEX "../textures/chessBoard.png"
-// # define S_TEX "../textures/Tile_20.png"
-// # define W_TEX "../textures/Tile_16.png"
+// # define N_TEX "textures/Bricks_01.png"
+// # define E_TEX "textures/chessBoard.png"
+// # define S_TEX "textures/Tile_20.png"
+// # define W_TEX "textures/Tile_16.png"
 
 ////////////////2048*2048///////////////////
-// # define N_TEX "../textures/BrickWallBlue.png"
-// # define E_TEX "../textures/BrickWallPurple.png"
-// # define S_TEX "../textures/redBricksWall.png"
-// # define W_TEX "../textures/BrickWallGrey.png"
+// # define N_TEX "textures/BrickWallBlue.png"
+// # define E_TEX "textures/BrickWallPurple.png"
+// # define S_TEX "textures/redBricksWall.png"
+// # define W_TEX "textures/BrickWallGrey.png"
 
 typedef struct s_element
 {

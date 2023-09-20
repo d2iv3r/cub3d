@@ -4,13 +4,13 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 
-L = -L/Users/efarhat/.brew/Cellar/glfw/3.3.8/lib
+L = -L/Users/mel-harc/.brew/Cellar/glfw/3.3.8/lib
 
-I = -I/Users/efarhat/.brew/Cellar/glfw/3.3.8/include/GLFW
+I = -I/Users/mel-harc/.brew/Cellar/glfw/3.3.8/include/GLFW
 
 SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
-mlx = /Users/efarhat/Desktop/MLX42/build/libmlx42.a
+mlx = /Users/mel-harc/MLX42/build/libmlx42.a
 
 SEGS = -Wuninitialized -fsanitize=address,undefined,integer -g
 

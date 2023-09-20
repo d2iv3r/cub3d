@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 11:05:07 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/20 12:04:25 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,13 @@ void	raycating_vertical(t_map *s, t_ray *r)
 	steps_y = 0;
 	if (r->ray_angle >= (M_PI / 2) && r->ray_angle <= (1.5 * M_PI))
 	{
-		r->cxv = floor(s->px / GRID) * GRID - 0.00008;
+		r->cxv = floor(s->px / GRID) * GRID - 0.0008;
 		r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
 		if (is_wall(s, r->cyv, r->cxv))
+		{
+			r->cxv += 0.0008;
 			return ;
+		}
 		steps_x = -GRID;
 		steps_y = steps_x * tan(r->ray_angle);
 	}
@@ -121,10 +124,13 @@ void	raycating_horizontal(t_map *s, t_ray *r)
 	}
 	else if (r->ray_angle >= M_PI)
 	{
-		r->cyh = (floor(s->py / GRID) * GRID) - 0.00008;
+		r->cyh = (floor(s->py / GRID) * GRID) - 0.0008;
 		r->cxh = s->px + ((r->cyh - s->py) / tan(r->ray_angle));
 		if (is_wall(s, r->cyh, r->cxh))
+		{
+			r->cyh += 0.0008;
 			return ;
+		}
 		steps_y = -GRID;
 		steps_x = steps_y / tan(r->ray_angle);
 	}
