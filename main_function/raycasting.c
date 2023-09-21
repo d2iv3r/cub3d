@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 13:08:34 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/21 13:25:13 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	cast_rays(t_map *s)
 	i = 0;
 	ws = 0;
 	r.ray_angle = s->ongl - (s->fov / 2);
-	load_textures_c(s);
 	while (i < COLUMS)
 	{
 		normalize_angle(&r);

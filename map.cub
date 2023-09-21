@@ -1,8 +1,8 @@
-NO        textures/Bricks_01.png
-SO     textures/Tile_20.png
-WE textures/Tile_16.png
+NO        textures/BrickWallBlue.png
+SO     textures/redBricksWall.png
+WE textures/BrickWallPurple.png
 
-EA textures/chessBoard.png
+EA textures/BrickWallgrey.png
 
 C 51,153,255
 F 160,160,160
