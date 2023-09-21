@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 13:06:22 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/21 17:48:26 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	handler_moves(void *param)
 	s->img = mlx_new_image(s->ptr_mlx, COLUMS, ROWS);
 	if (!s->img)
 		ft_error("Error\nmlx_new_imge", 1, 0);
-	// mini_map(s);
 	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);
 	if (s->window < 0)
 		ft_error("Error\nmlx_imge_to window", 1, 0);
@@ -60,6 +59,29 @@ void	direction_player(t_map *s, float distance)
 	}
 }
 
+void	mouse_helper(t_map *s)
+{
+	int	new_x;
+	int	new_y;
+	int distance;
+	float r;
+
+	mlx_get_mouse_pos(s->ptr_mlx, &new_x, &new_y);
+	if (new_x > 0 && new_x < COLUMS && new_y > 0 && new_y < ROWS)
+	{
+		if (s->mouse_x != new_x)
+		{
+			distance = new_x - s->mouse_x;
+			r = (_abs(distance) * (M_PI * 2) / COLUMS);
+			if (distance < 0)
+				s->ongl -= r;
+			else
+				s->ongl += r;
+			s->mouse_x = new_x;
+		}
+	}
+}
+
 void	handler_move_view(t_map *s)
 {
 	if (s->ud_walk)
@@ -72,6 +94,7 @@ void	handler_move_view(t_map *s)
 	}
 	if (s->lr_view)
 		s->ongl += (s->lr_view * s->rotation_speed);
+	mouse_helper(s);
 }
 
 void	hook(t_map *s)

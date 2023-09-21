@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 13:22:10 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 17:39:39 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ void	init_angle(t_map *s)
 void	init_value(t_map *s)
 {
 	init_angle(s);
+	mlx_get_mouse_pos(s->ptr_mlx, &s->mouse_x, &s->mouse_y);
 	s->ptr_mlx = mlx_init(COLUMS, ROWS, "cub3d", true);
 	if (!s->ptr_mlx)
 		ft_error("Error\nmlx_init", 1, 0);
 	player_pos(s);
+	load_textures_c(s);
 }
 
 void	put_line(t_point *p, t_map *s, float distance)

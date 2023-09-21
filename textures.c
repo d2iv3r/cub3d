@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:23:41 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/21 13:06:42 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/21 18:03:37 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	get_rgb(t_map *s, int p, int yt, int xt)
 	int	b;
 	int	a;
 
-	r = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt)];
-	g = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 1)];
-	b = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 2)];
-	a = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 3)];
+	r = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt)];
+	g = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt + 1)];
+	b = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt + 2)];
+	a = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt + 3)];
 	s->color = get_color(r, g, b, a);
 }
 

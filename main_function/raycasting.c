@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 13:08:34 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/21 17:49:58 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	cast_rays(t_map *s)
 	i = 0;
 	ws = 0;
 	r.ray_angle = s->ongl - (s->fov / 2);
-	load_textures_c(s);
 	while (i < COLUMS)
 	{
 		normalize_angle(&r);
@@ -94,6 +93,14 @@ double	first_cray(t_map *s, t_ray *r)
 		dis = dis_v;
 		r->hith = 0;
 	}
+	// else if (dis_h == dis_v)
+	// {
+	// 	if (s->tmap->map[(int)(r->cyv - 1)][(int)(r->cxv)] == '1')
+	// 		r->hith = 0;
+	// 	else
+	// 		r->hith = 1;
+	// 	dis = dis_h;
+	// }
 	return (dis * cos(s->ongl - r->ray_angle));
 }
 
@@ -106,7 +113,7 @@ void	raycating_vertical(t_map *s, t_ray *r)
 	steps_y = 0;
 	if (r->ray_angle >= (M_PI / 2) && r->ray_angle <= (1.5 * M_PI))
 	{
-		r->cxv = floor(s->px / GRID) * GRID - 0.0008;
+		r->cxv = (floor(s->px / GRID) * GRID) - 0.0008;
 		r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
 		if (is_wall(s, r->cyv, r->cxv))
 		{

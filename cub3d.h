@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/21 10:48:11 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/21 17:38:29 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,8 @@ typedef struct s_map
 	unsigned int	fc;
 	mlx_texture_t	*tex[4];
 	t_mm			*mm;
+	int				mouse_x;
+	int				mouse_y;
 }	t_map;
 
 typedef struct s_point
