@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 12:36:16 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:22:10 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	init_angle(t_map *s)
 		s->ongl = 0;
 	if (s->tmap->pos == 'N')
 		s->ongl = 270 * (M_PI / 180);
-	s->rotation_speed = 2 * (M_PI / 180);
+	s->rotation_speed = 3 * (M_PI / 180);
 	s->fov = 60 * (M_PI / 180);
-	s->move_speed = GRID / 10;
+	s->move_speed = GRID / 7;
 	s->lr_view = 0;
 	s->ud_walk = 0;
 	s->lr_walk = 0;
