@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:23:41 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/20 21:19:13 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:03:05 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void	load_textures_c(t_map *s)
 		else if (!ft_strcmp(s->tmap->elem[i].id, "WE"))
 			s->tex[W] = mlx_load_png(s->tmap->elem[i].info);
 		else if (!ft_strcmp(s->tmap->elem[i].id, "F"))
-			s->cc = get_color(s->tmap->elem[i].color[0],
+			s->fc = get_color(s->tmap->elem[i].color[0],
 					s->tmap->elem[i].color[1], s->tmap->elem[i].color[2], 255);
 		else if (!ft_strcmp(s->tmap->elem[i].id, "C"))
-			s->fc = get_color(s->tmap->elem[i].color[0],
+			s->cc = get_color(s->tmap->elem[i].color[0],
 					s->tmap->elem[i].color[1], s->tmap->elem[i].color[2], 255);
 		i++;
 	}

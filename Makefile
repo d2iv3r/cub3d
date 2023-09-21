@@ -4,13 +4,13 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -Wunreachable-code -Ofast
 
-L = -L/Users/mel-harc/.brew/Cellar/glfw/3.3.8/lib
+L = -L/Users/efarhat/.brew/Cellar/glfw/3.3.8/lib
 
-I = -I/Users/mel-harc/.brew/Cellar/glfw/3.3.8/include/GLFW
+I = -I/Users/efarhat/.brew/Cellar/glfw/3.3.8/include/GLFW
 
 SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
-mlx = /Users/mel-harc/MLX42/build/libmlx42.a
+mlx = /Users/efarhat/Desktop/MLX42/build/libmlx42.a
 
 SEGS = -Wuninitialized -fsanitize=address,undefined,integer -g
 
@@ -25,7 +25,7 @@ PARS = parsing/check_map.c parsing/get_elements.c parsing/check_elements.c\
 UTILS = main_function/draw_map.c main_function/hook_functions.c main_function/utils.c \
 		main_function/raycasting.c main_function/utils_raycasting.c main_function/init.c\
 
-SRC = $(LIBFT) $(UTILS) $(PARS) cub3d.c textures.c
+SRC = $(LIBFT) $(UTILS) $(PARS) cub3d.c mini_map.c textures.c
 
 OBJ = $(SRC:.c=.o)
 

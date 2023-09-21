@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/20 22:59:26 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:48:11 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define E 1
 # define S 2
 # define W 3
+# define MGRID 16
 
 ///////////////////64*64///////////////////
 // # define N_TEX "textures/northTexture.png"
@@ -69,6 +70,26 @@ typedef struct s_pmap
 	int			y;
 }			t_pmap;
 
+typedef struct s_mm
+{
+	mlx_image_t		*img;
+	int				h;
+	int				w;
+	int				grid;
+	int				rw;
+	int				clm;
+	float			px;
+	float			py;
+	unsigned int	col;
+	int				y;
+	int				x;
+	int				a;
+	int				b;
+	int				c;
+	int				d;
+
+}			t_mm;
+
 typedef struct s_map
 {
 	int				weight;
@@ -91,6 +112,7 @@ typedef struct s_map
 	unsigned int	cc;
 	unsigned int	fc;
 	mlx_texture_t	*tex[4];
+	t_mm			*mm;
 }	t_map;
 
 typedef struct s_point
@@ -160,5 +182,8 @@ int			num_lines(char **arr);
 void		clean_arr2d(char **arr2d);
 void		put_tex_colmn(t_map *s, int x, double w_s, t_ray ray);
 void		load_textures_c(t_map *s);
+void		mini_map(t_map *p);
+unsigned int	get_color(unsigned int r, unsigned int g,
+	unsigned int b, unsigned int a);
 
 #endif

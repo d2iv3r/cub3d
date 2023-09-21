@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 22:59:10 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 13:02:44 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	draw_c_f(t_map *s, double ws, int x, int f)
+{
+	int	start;
+	int	end;
+
+	if (f == 0)
+	{
+		start = 0;
+		end = (ROWS / 2) - (ws / 2);
+		while (start < end)
+		{
+			mlx_put_pixel(s->img, x, start, s->cc);
+			start++;
+		}
+	}
+	else
+	{
+		start = (ROWS / 2) + (ws / 2);
+		while (start < ROWS)
+		{
+			mlx_put_pixel(s->img, x, start, s->fc);
+			start++;
+		}
+	}
+}
 
 void	cast_rays(t_map *s)
 {
@@ -29,8 +55,10 @@ void	cast_rays(t_map *s)
 		dis = first_cray(s, &r);
 		if ((int)dis != 0)
 			ws = (530 / dis) * 100;
+		draw_c_f(s, ws, i, 0);
 		r.ray_angle += s->fov / COLUMS;
 		put_tex_colmn(s, i, ws, r);
+		draw_c_f(s, ws, i, 1);
 		i++;
 	}
 }

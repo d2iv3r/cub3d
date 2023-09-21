@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/19 16:47:03 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:34:47 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ void	handler_moves(void *param)
 	s->img = mlx_new_image(s->ptr_mlx, COLUMS, ROWS);
 	if (!s->img)
 		ft_error("Error\nmlx_new_imge", 1, 0);
+	// mini_map(s);
 	s->window = mlx_image_to_window(s->ptr_mlx, s->img, 0, 0);
 	if (s->window < 0)
 		ft_error("Error\nmlx_imge_to window", 1, 0);
 	cast_rays(s);
-	drawing_img(s);
+	// drawing_img(s);
 	handler_move_view(s);
-	pixels_player(s, s->px, s->py);
-	direction_player(s, 20);
+	// if (mlx_image_to_window(s->ptr_mlx, s->mm->img, 0, 0) == -1)
+	// 	ft_error("Error\nmlx_imge_to window", 1, 0);
+	// pixels_player(s, s->px, s->py);
+	// direction_player(s, 20);
 	s->lr_walk = 0;
 	s->ud_walk = 0;
 	s->lr_view = 0;
