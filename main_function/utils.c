@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:10:11 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 23:38:04 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 10:56:14 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,28 @@ int	is_wall(t_map *s, float y, float x)
 
 void	check_wall(t_map *map, float x, float y)
 {
+	int	dis;
+
+	dis = GRID / 8;
 	if (x <= 0 || x >= map->weight || y <= 0 || y >= map->height)
 		return ;
-	if ((x + 20) <= 0 || (x + 20) >= map->weight || (y + 20) <= 0 || (y + 20)  >= map->height)
+	else if ((x + dis) <= 0 || (x + dis) >= map->weight || (y + dis) <= 0 || (y + dis)  >= map->height)
 		return ;
-	if (map->tmap->map[(int)((y + 10) / GRID)][(int)((x + 10) / GRID)] == '1')
+	else if ((x - dis) <= 0 || (x - dis) >= map->weight || (y - dis) <= 0 || (y - dis)  >= map->height)
 		return ;
-	if (map->tmap->map[(int)floor (y / GRID)][(int)floor (x / GRID)] != '1')
+	else if (map->tmap->map[(int)((y + dis) / GRID)][(int)((x + dis) / GRID)] == '1')
+		return ;
+	else if (map->tmap->map[(int)((y - dis) / GRID)][(int)((x - dis) / GRID)] == '1')
+		return ;
+	else if (map->tmap->map[(int)((y) / GRID)][(int)((x - dis) / GRID)] == '1')
+		return ;
+	else if (map->tmap->map[(int)((y) / GRID)][(int)((x + dis) / GRID)] == '1')
+		return ;
+	else if (map->tmap->map[(int)((y - dis) / GRID)][(int)((x) / GRID)] == '1')
+		return ;
+	else if (map->tmap->map[(int)((y + dis) / GRID)][(int)((x) / GRID)] == '1')
+		return ;
+	else
 	{
 		map->px = x;
 		map->py = y;

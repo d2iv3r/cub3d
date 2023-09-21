@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 13:02:44 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/21 13:08:34 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ void	cast_rays(t_map *s)
 	{
 		normalize_angle(&r);
 		dis = first_cray(s, &r);
-		if ((int)dis != 0)
+		if ((int)dis == 0)
+			ws = (530 / ROWS) * 100;
+		else
 			ws = (530 / dis) * 100;
 		draw_c_f(s, ws, i, 0);
 		r.ray_angle += s->fov / COLUMS;
