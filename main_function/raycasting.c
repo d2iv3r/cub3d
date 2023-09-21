@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 22:59:10 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:41:32 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ void	cast_rays(t_map *s)
 	{
 		normalize_angle(&r);
 		dis = first_cray(s, &r);
-		if ((int)dis != 0)
+		if ((int)dis == 0)
+			ws = (530 / ROWS) * 100;
+		else
 			ws = (530 / dis) * 100;
-		r.ray_angle += s->fov / COLUMS;
 		put_tex_colmn(s, i, ws, r);
+		r.ray_angle += s->fov / COLUMS;
 		i++;
 	}
 }

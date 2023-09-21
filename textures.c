@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:23:41 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/20 21:19:13 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 11:53:45 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray)
 		{
 			yt = i * ((float)s->tex[p]->height / w_s);
 			get_rgb(s, p, xt, yt);
-			if (i + y >= 0 && i + y <= ROWS && x > 0 && x <= COLUMS)
+			if (i + y >= 0 && i + y < ROWS && x >= 0 && x <= COLUMS)
 				mlx_put_pixel(s->img, x, y + i, s->color);
 		}
 		i++;

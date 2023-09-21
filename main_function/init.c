@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/20 21:34:59 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/21 12:36:16 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,8 @@ void	player_pos(t_map *s)
 			if (s->tmap->map[i][j] == 'S' || s->tmap->map[i][j] == 'W' || \
 				s->tmap->map[i][j] == 'E' || s->tmap->map[i][j] == 'N')
 			{
-				s->px = j * GRID;
-				s->py = i * GRID;
+				s->px = (j * GRID) + (GRID / 7);
+				s->py = (i * GRID) + (GRID / 7);
 			}
 		}
 	}
