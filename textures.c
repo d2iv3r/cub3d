@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 13:23:41 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/21 18:03:37 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:37:30 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray)
 	int		yt;
 	long	i;
 	int		p;
-
+	
 	p = get_pos(ray);
 	if (ray.hith)
 		xt = fmod(ray.cxh, GRID) * (s->tex[p]->width / GRID);

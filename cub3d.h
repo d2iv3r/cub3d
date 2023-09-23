@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/21 17:38:29 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:41:04 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <fcntl.h>
+# include <limits.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include "libft/libft.h"
@@ -26,6 +27,7 @@
 # define ROWS 1000
 # define COLUMS 1600
 # define MINI_MAP 0.3
+# define ECART 1
 # define N 0
 # define E 1
 # define S 2
@@ -163,7 +165,7 @@ double	first_cray(t_map *s, t_ray *r);
 void	cast_rays(t_map *s);
 void	raycating_horizontal(t_map *s, t_ray *r);
 void	raycating_vertical(t_map *s, t_ray *r);
-int		is_wall(t_map *s, float x, float y);
+int		is_wall(t_map *s, float y, float x);
 void	normalize_angle(t_ray *r);
 void	init_angle(t_map *s);
 void	handler_move_view(t_map *s);
@@ -172,6 +174,7 @@ void	put_line(t_point *p, t_map *s, float distance);
 void	check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y);
 void	check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y);
 void	draw_colome(t_map *s, int i, double w_s);
+double	ray_distance(double dis_h, double dis_v, t_ray *r);
 
 int			check_map(t_pmap *tmap);
 t_element	*init_telem(char *map);

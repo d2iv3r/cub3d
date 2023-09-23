@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 17:48:26 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/22 20:45:22 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	direction_player(t_map *s, float distance)
 	put_line(&p, s, distance);
 	while (++i < p.steps)
 	{
-		if (x >= 0 && x <= s->weight && y >= 0 && y <= s->height && y < ROWS && x < COLUMS)
+		if (x >= 0 && y >= 0 && y < ROWS && x < COLUMS)
 		{
 			mlx_put_pixel(s->img, floor(x), floor(y), 0xFF5733FF);
 			x += p.xinc;
@@ -61,10 +61,10 @@ void	direction_player(t_map *s, float distance)
 
 void	mouse_helper(t_map *s)
 {
-	int	new_x;
-	int	new_y;
-	int distance;
-	float r;
+	int		new_x;
+	int		new_y;
+	int		distance;
+	float	r;
 
 	mlx_get_mouse_pos(s->ptr_mlx, &new_x, &new_y);
 	if (new_x > 0 && new_x < COLUMS && new_y > 0 && new_y < ROWS)

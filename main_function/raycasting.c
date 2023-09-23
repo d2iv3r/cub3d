@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 09:38:32 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 17:49:58 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/23 09:09:41 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	draw_c_f(t_map *s, double ws, int x, int f)
 		end = (ROWS / 2) - (ws / 2);
 		while (start < end)
 		{
-			mlx_put_pixel(s->img, x, start, s->cc);
+			if (x >= 0 && x < COLUMS && start >= 0 && start < ROWS)
+				mlx_put_pixel(s->img, x, start, s->cc);
 			start++;
 		}
 	}
@@ -32,7 +33,8 @@ void	draw_c_f(t_map *s, double ws, int x, int f)
 		start = (ROWS / 2) + (ws / 2);
 		while (start < ROWS)
 		{
-			mlx_put_pixel(s->img, x, start, s->fc);
+			if (x >= 0 && x < COLUMS && start >= 0 && start < ROWS)
+				mlx_put_pixel(s->img, x, start, s->fc);
 			start++;
 		}
 	}
@@ -57,9 +59,9 @@ void	cast_rays(t_map *s)
 		else
 			ws = (530 / dis) * 100;
 		draw_c_f(s, ws, i, 0);
-		r.ray_angle += s->fov / COLUMS;
 		put_tex_colmn(s, i, ws, r);
 		draw_c_f(s, ws, i, 1);
+		r.ray_angle += (s->fov / COLUMS);
 		i++;
 	}
 }
@@ -68,12 +70,10 @@ double	first_cray(t_map *s, t_ray *r)
 {
 	double	dis_h;
 	double	dis_v;
-	double	dis;
 
 	dis_h = -1;
 	dis_v = -1;
-	dis = 0;
-	if (r->ray_angle != 0 && r->ray_angle != M_PI)
+	if (r->ray_angle != 0 && r->ray_angle != M_PI &&  r->ray_angle != (M_PI * 2))
 	{
 		raycating_horizontal(s, r);
 		dis_h = sqrt(pow(r->cxh - s->px, 2) + pow(r->cyh - s->py, 2));
@@ -83,25 +83,22 @@ double	first_cray(t_map *s, t_ray *r)
 		raycating_vertical(s, r);
 		dis_v = sqrt(pow(r->cxv - s->px, 2) + pow(r->cyv - s->py, 2));
 	}
-	if (dis_h != -1 && dis_h < dis_v)
+	return (ray_distance(dis_h, dis_v, r) * cos(s->ongl - r->ray_angle));
+}
+
+double	ray_distance(double dis_h, double dis_v, t_ray *r)
+{
+	if (dis_h != -1 && dis_h <= dis_v)
 	{
-		dis = dis_h;
 		r->hith = 1;
+		return (dis_h);
 	}
 	else if (dis_v != -1 && dis_h > dis_v)
 	{
-		dis = dis_v;
 		r->hith = 0;
+		return (dis_v);
 	}
-	// else if (dis_h == dis_v)
-	// {
-	// 	if (s->tmap->map[(int)(r->cyv - 1)][(int)(r->cxv)] == '1')
-	// 		r->hith = 0;
-	// 	else
-	// 		r->hith = 1;
-	// 	dis = dis_h;
-	// }
-	return (dis * cos(s->ongl - r->ray_angle));
+	return (0);
 }
 
 void	raycating_vertical(t_map *s, t_ray *r)
@@ -111,15 +108,28 @@ void	raycating_vertical(t_map *s, t_ray *r)
 
 	steps_x = 0;
 	steps_y = 0;
-	if (r->ray_angle >= (M_PI / 2) && r->ray_angle <= (1.5 * M_PI))
+
+	// r->cxv = (floor(s->px / GRID) * GRID);
+	// if (r->ray_angle <= M_PI / 2 && r->ray_angle >= (M_PI * 1.5))
+	// 	r->cxv += GRID;
+	// r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
+	// steps_x = GRID;
+	// if (r->ray_angle >= M_PI / 2 && r->ray_angle <= (M_PI * 1.5))
+	// 	steps_x *= -1;
+	// steps_y = steps_x * tan(r->ray_angle);
+	// while (r->cyv > 0 && r->cyv < s->height && r->cxv > 0 && r->cxv < s->weight)
+	// {
+	// 	if (is_wall(s, r->cyv, r->cxv))
+	// 		break;
+	// 	r->cxv += steps_x;
+	// 	r->cyv += steps_y;
+	// }
+	if (r->ray_angle > (M_PI / 2) && r->ray_angle < (1.5 * M_PI))
 	{
-		r->cxv = (floor(s->px / GRID) * GRID) - 0.0008;
+		r->cxv = (floor(s->px / GRID) * GRID);
 		r->cyv = s->py + (tan(r->ray_angle) * (r->cxv - s->px));
-		if (is_wall(s, r->cyv, r->cxv))
-		{
-			r->cxv += 0.0008;
+		if (is_wall(s, r->cyv, r->cxv - ((r->ray_angle > (M_PI / 2) && r->ray_angle < (1.5 * M_PI)) ? 1 : 0)))
 			return ;
-		}
 		steps_x = -GRID;
 		steps_y = steps_x * tan(r->ray_angle);
 	}
@@ -142,6 +152,23 @@ void	raycating_horizontal(t_map *s, t_ray *r)
 
 	steps_x = 0;
 	steps_y = 0;
+
+	// r->cyh = (floor(s->py / GRID) * GRID);
+	// if (r->ray_angle > 0 && r->ray_angle < M_PI)
+	// 	r->cyh += GRID;
+	// r->cxh = s->px + ((r->cyh - s->py) / tan(r->ray_angle));
+	// steps_y = GRID;
+	// if (r->ray_angle > M_PI && r->ray_angle < (M_PI * 2))
+	// 	steps_y *= -1;
+	// steps_x = steps_y / tan(r->ray_angle);
+	// while (r->cyh > 0 && r->cyh < s->height && r->cxh > 0 && r->cxh < s->weight)
+	// {
+	// 	if (is_wall(s, r->cyh, r->cxh))
+	// 		break;
+	// 	r->cxh += steps_x;
+	// 	r->cyh += steps_y;
+	// }
+	
 	if (r->ray_angle >= 0 && r->ray_angle <= M_PI)
 	{
 		r->cyh = (floor(s->py / GRID) * GRID) + GRID;
@@ -151,15 +178,12 @@ void	raycating_horizontal(t_map *s, t_ray *r)
 		steps_x = GRID / tan(r->ray_angle);
 		steps_y = GRID;
 	}
-	else if (r->ray_angle >= M_PI)
+	else if (r->ray_angle > M_PI)
 	{
-		r->cyh = (floor(s->py / GRID) * GRID) - 0.0008;
+		r->cyh = (floor(s->py / GRID) * GRID);
 		r->cxh = s->px + ((r->cyh - s->py) / tan(r->ray_angle));
-		if (is_wall(s, r->cyh, r->cxh))
-		{
-			r->cyh += 0.0008;
+		if (is_wall(s, r->cyh - (r->ray_angle > M_PI ? 1 : 0), r->cxh))
 			return ;
-		}
 		steps_y = -GRID;
 		steps_x = steps_y / tan(r->ray_angle);
 	}

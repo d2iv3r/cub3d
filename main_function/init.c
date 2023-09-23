@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/21 17:39:39 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:38:13 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,10 @@ void	init_value(t_map *s)
 
 void	put_line(t_point *p, t_map *s, float distance)
 {
-	p->x2 = s->px + (cos(s->ongl) * distance);
-	p->y2 = s->py + (sin(s->ongl) * distance);
-	p->dx = p->x2 - s->px;
-	p->dy = p->y2 - s->py;
-	if (_abs(p->dy) > _abs(p->dx))
-		p->steps = _abs(p->dy);
-	else
-		p->steps = _abs(p->dx);
-	p->xinc = p->dx / (float)p->steps;
-	p->yinc = p->dy / (float)p->steps;
+(void)p;
+(void)s;
+(void)distance;
+return ;
 }
 
 void	player_pos(t_map *s)
@@ -73,8 +67,8 @@ void	player_pos(t_map *s)
 			if (s->tmap->map[i][j] == 'S' || s->tmap->map[i][j] == 'W' || \
 				s->tmap->map[i][j] == 'E' || s->tmap->map[i][j] == 'N')
 			{
-				s->px = (j * GRID) + (GRID / 7);
-				s->py = (i * GRID) + (GRID / 7);
+				s->px = (j * GRID) /*+ (GRID / 7*/;
+				s->py = (i * GRID) /*+ (GRID / 7)*/;
 			}
 		}
 	}
@@ -96,5 +90,16 @@ void	put_rays(t_map *s, float angle, double distance)
 	p.yinc = p.dy / (float)p.steps;
 	p.x = s->px;
 	p.y = s->py;
-	put_line(&p, s, distance);
+	int	 i = -1;
+	while (++i < p.steps)
+	{
+		if (p.x >= 0 && p.y >= 0 && p.y < ROWS && p.x < COLUMS)
+		{
+			mlx_put_pixel(s->img, floor(p.x), floor(p.y), 0xFF5733FF);
+			p.x += p.xinc;
+			p.y += p.yinc;
+		}
+		else
+			break ;
+	}
 }

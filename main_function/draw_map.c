@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:02:50 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/19 16:48:42 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/22 22:35:59 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ void	pixels_wall(t_map *map, int x, int y)
 	int	j;
 
 	i = -1;
-	while (++i < 20)
+	while (++i < (GRID * MINI_MAP))
 	{
 		j = -1;
-		while (++j < 20 && y +j < ROWS && i + x < COLUMS)
-				mlx_put_pixel(map->img, x + i, y + j, 0xFFFFFF);
+		while (++j < (GRID * MINI_MAP) && y + j < ROWS && i + x < COLUMS)
+			mlx_put_pixel(map->img, x + i, y + j, 0xFFFFFF);
 	}
 }
 
