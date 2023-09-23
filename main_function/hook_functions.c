@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/22 20:45:22 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/23 17:05:26 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,37 +26,10 @@ void	handler_moves(void *param)
 	if (s->window < 0)
 		ft_error("Error\nmlx_imge_to window", 1, 0);
 	cast_rays(s);
-	drawing_img(s);
 	handler_move_view(s);
-	pixels_player(s, s->px, s->py);
-	direction_player(s, 20);
 	s->lr_walk = 0;
 	s->ud_walk = 0;
 	s->lr_view = 0;
-}
-
-void	direction_player(t_map *s, float distance)
-{
-	t_point	p;
-	int		i;
-	float	x;
-	float	y;
-
-	i = -1;
-	x = (s->px + 20) * MINI_MAP;
-	y = (s->py + 20) * MINI_MAP;
-	put_line(&p, s, distance);
-	while (++i < p.steps)
-	{
-		if (x >= 0 && y >= 0 && y < ROWS && x < COLUMS)
-		{
-			mlx_put_pixel(s->img, floor(x), floor(y), 0xFF5733FF);
-			x += p.xinc;
-			y += p.yinc;
-		}
-		else
-			break ;
-	}
 }
 
 void	mouse_helper(t_map *s)

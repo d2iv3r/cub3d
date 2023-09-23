@@ -25,7 +25,7 @@ PARS = parsing/check_map.c parsing/get_elements.c parsing/check_elements.c\
 UTILS = main_function/draw_map.c main_function/hook_functions.c main_function/utils.c \
 		main_function/raycasting.c main_function/utils_raycasting.c main_function/init.c\
 
-SRC = $(LIBFT) $(UTILS) $(PARS) cub3d.c mini_map.c textures.c
+SRC = $(LIBFT) $(UTILS) $(PARS) cub3d.c textures.c
 
 OBJ = $(SRC:.c=.o)
 
