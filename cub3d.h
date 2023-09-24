@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/23 17:21:31 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:04:54 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,6 @@
 # define E 1
 # define S 2
 # define W 3
-# define MGRID 16
-
-///////////////////64*64///////////////////
-// # define N_TEX "textures/northTexture.png"
-// # define E_TEX "textures/eastTexture.png"
-// # define S_TEX "textures/southTexture.png"
-// # define W_TEX "textures/westTexture.png"
-
-/////////////////128*128///////////////////
-# define N_TEX "textures/Bricks_01.png"
-# define E_TEX "textures/chessBoard.png"
-# define S_TEX "textures/Tile_20.png"
-# define W_TEX "textures/Tile_16.png"
-
-////////////////2048*2048///////////////////
-// # define N_TEX "textures/BrickWallBlue.png"
-// # define E_TEX "textures/BrickWallPurple.png"
-// # define S_TEX "textures/redBricksWall.png"
-// # define W_TEX "textures/BrickWallGrey.png"
 
 typedef struct s_element
 {

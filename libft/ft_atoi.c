@@ -6,11 +6,19 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/13 15:03:32 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/21 13:02:05 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/24 10:31:29 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	check_(const char *str, int i)
+{
+	while (str[i] && is_empty(str[i]))
+		i++;
+	if (str[i])
+		ft_error("Error\nInvalid color number", 1, 0);
+}
 
 int	ft_atoi(const char *str)
 {
@@ -37,9 +45,6 @@ int	ft_atoi(const char *str)
 			return (0);
 		i++;
 	}
-	while (str[i] && is_empty(str[i]))
-		i++;
-	if (str[i])
-		ft_error("Error\nInvalid color number\n", 1, 0);
+	check_(str, i);
 	return ((int)nb * s);
 }

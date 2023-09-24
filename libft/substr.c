@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   substr.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:57:06 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 14:22:11 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:02:48 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "libft.h"
 
 static	size_t	ft_count_size(unsigned int start, size_t len, size_t lens)
 {

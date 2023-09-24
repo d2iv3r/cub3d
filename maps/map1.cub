@@ -4,8 +4,8 @@ WE textures/BrickWallPurple.png
 
 EA textures/BrickWallgrey.png
 
-C 51,153,255
-F 160,160,160
+C   51    ,  153 ,  255
+F 160 , 160 , 160
 
 11111111111111111111
 10010000000000000001

@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:48:11 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/21 13:02:32 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/24 11:12:54 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ int	check_map(t_pmap *tmap)
 		ft_error("Error\nMap not closed!", 1, 0);
 	tmap->colums = get_long_line(tmap->map) * GRID;
 	tmap->rows = num_lines(tmap->map) * GRID;
+	close(tmap->fd);
 	return (1);
 }

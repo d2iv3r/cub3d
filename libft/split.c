@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:56:59 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/13 14:21:56 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:02:27 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "libft.h"
 
 static	size_t	ft_nwords(const char *s, char c)
 {

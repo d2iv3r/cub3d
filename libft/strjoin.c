@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   strjoin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 09:57:03 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/08/17 09:58:46 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/24 11:02:40 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include "libft.h"
 
 char	*_strjoin(const char *s1, const char *s2)
 {
