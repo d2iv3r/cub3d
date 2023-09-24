@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/24 13:10:23 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/24 14:48:56 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	init_angle(t_map *s)
 void	init_value(t_map *s)
 {
 	init_angle(s);
-	mlx_get_mouse_pos(s->ptr_mlx, &s->mouse_x, &s->mouse_y);
 	s->ptr_mlx = mlx_init(COLUMS, ROWS, "cub3d", true);
 	if (!s->ptr_mlx)
 		ft_error("Error\nmlx_init", 1, 0);

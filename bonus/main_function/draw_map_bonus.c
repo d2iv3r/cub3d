@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 12:02:50 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/24 13:19:24 by efarhat          ###   ########.fr       */
+/*   Created: 2023/09/24 14:46:22 by mel-harc          #+#    #+#             */
+/*   Updated: 2023/09/24 14:46:27 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cub3d.h"
+#include "../cub3d_bonus.h"
 
 void	draw_map(t_map *s)
 {
@@ -65,8 +65,8 @@ void	pixels_player(t_map *map, float x, float y)
 		j = -1;
 		while (++j < 8)
 		{
-			ox = (x + i + 15) * MINI_MAP;
-			oy = (y + j + 15) * MINI_MAP;
+			ox = (x + i) * MINI_MAP;
+			oy = (y + j) * MINI_MAP;
 			if (ox >= 0 && ox <= COLUMS && oy >= 0 && oy <= ROWS)
 				mlx_put_pixel(map->img, ox, oy, 0xFFFFFF);
 		}
@@ -81,8 +81,8 @@ void	direction_player(t_map *s, float distance)
 	float	y;
 
 	i = -1;
-	x = (s->px + 15) * MINI_MAP;
-	y = (s->py + 15) * MINI_MAP;
+	x = s->px * MINI_MAP;
+	y = s->py * MINI_MAP;
 	put_line(&p, s, distance);
 	while (++i < p.steps)
 	{

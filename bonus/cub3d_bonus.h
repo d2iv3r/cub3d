@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/24 13:10:36 by efarhat          ###   ########.fr       */
+/*   Created: 2023/09/24 14:42:01 by mel-harc          #+#    #+#             */
+/*   Updated: 2023/09/24 14:51:58 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include <math.h>
 # include <string.h>
-# include "../MLX42/include/MLX42/MLX42.h"
+# include "../../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <fcntl.h>
 # include <limits.h>
@@ -155,6 +155,7 @@ void			drawing_img(t_map *map);
 void			pixels_player(t_map *map, float x, float y);
 void			direction_player(t_map *s, float distance);
 void			put_line(t_point *p, t_map *s, float distance);
+void			handler_move_view(t_map *s);
 
 int				check_map(t_pmap *tmap);
 t_element		*init_telem(char *map);
