@@ -12,7 +12,12 @@ I = -I/Users/mel-harc/.brew/Cellar/glfw/3.3.8/include/GLFW
 
 SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
 
-mlx = $(PWD)/MLX42/build/libmlx42.a
+
+MLX	:= MLX42/build/libmlx42.a
+
+LIBS	:= $(MLX42) -ldl -lglfw -pthread -lm
+
+MLX_DIR = MLX42/
 
 LIBFT = mandatory/libft/ft_strrchr.c mandatory/libft/ft_strncmp.c mandatory/libft/ft_split.c mandatory/libft/ft_substr.c mandatory/libft/ft_isalpha.c\
 		mandatory/libft/ft_strdup.c mandatory/libft/ft_strlen.c mandatory/libft/ft_memcpy.c mandatory/libft/ft_memset.c mandatory/libft/ft_isdigit.c\
@@ -45,23 +50,27 @@ OBJ = $(SRC:.c=.o)
 
 OBJ_B = $(SRC_B:.c=.o)
 
-all : $(NAME)
+all : $(MLX) $(NAME)
 
 $(NAME) : $(OBJ) mandatory/cub3d.h  
-	$(CC) $(CFLAGS) $(OBJ) $(SUB) $(SEGS) -o $(NAME) $(L) $(I) $(mlx)
+	$(CC) $(CFLAGS) $(OBJ) $(SUB) $(LIBS) $(SEGS) -o $(NAME) $(L) $(I) $(MLX)
 
 %.o: %.c mandatory/cub3d.h mandatory/libft/libft.h
 	$(CC) $(CFLAGS) $(SEGS)  -c $< -o $@ $(I)
 
 bonus : $(OBJ_B) bonus/cub3d_bonus.h bonus/libft/libft.h
-		$(CC) $(CFLAGS) $(SUB) $(OBJ_B)  -o $(NAME_B) $(L) $(I) $(mlx)
+		$(CC) $(CFLAGS) $(SUB) $(LIBS) $(OBJ_B)  -o $(NAME_B) $(L) $(I) $(MLX)
+
+$(MLX):
+	cmake $(MLX_DIR) -B $(MLX_DIR)/build && make -C $(MLX_DIR)/build -j4
 
 clean :
 	rm -rf $(OBJ) $(OBJ_B)
 
 fclean : clean
 	rm -rf $(NAME) $(NAME_B)
+	rm -rf $(LIBMLX)/build
 
 re : fclean all bonus
 
-.PHONY : clean all fclean re
+.PHONY : clean all fclean re libmlx
