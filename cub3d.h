@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 15:23:34 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/24 11:04:54 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/24 13:10:36 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,11 @@ void			check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y);
 void			check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y);
 void			draw_colome(t_map *s, int i, double w_s);
 double			ray_distance(double dis_h, double dis_v, t_ray *r);
+void			pixels_wall(t_map *map, int x, int y);
+void			drawing_img(t_map *map);
+void			pixels_player(t_map *map, float x, float y);
+void			direction_player(t_map *s, float distance);
+void			put_line(t_point *p, t_map *s, float distance);
 
 int				check_map(t_pmap *tmap);
 t_element		*init_telem(char *map);

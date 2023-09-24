@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/16 16:29:10 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/23 17:09:24 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/24 13:10:23 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,18 @@ void	player_pos(t_map *s)
 			}
 		}
 	}
+}
+
+void	put_line(t_point *p, t_map *s, float distance)
+{
+	p->x2 = s->px + (cos(s->ongl) * distance);
+	p->y2 = s->py + (sin(s->ongl) * distance);
+	p->dx = p->x2 - s->px;
+	p->dy = p->y2 - s->py;
+	if (_abs(p->dy) > _abs(p->dx))
+		p->steps = _abs(p->dy);
+	else
+		p->steps = _abs(p->dx);
+	p->xinc = p->dx / (float)p->steps;
+	p->yinc = p->dy / (float)p->steps;
 }

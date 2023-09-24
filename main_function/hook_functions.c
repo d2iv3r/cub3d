@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hook_functions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 17:06:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/23 17:05:26 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/24 13:11:28 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ void	handler_moves(void *param)
 	if (s->window < 0)
 		ft_error("Error\nmlx_imge_to window", 1, 0);
 	cast_rays(s);
+	drawing_img(s);
 	handler_move_view(s);
+	pixels_player(s, s->px, s->py);
+	direction_player(s, 20);
 	s->lr_walk = 0;
 	s->ud_walk = 0;
 	s->lr_view = 0;
