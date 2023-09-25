@@ -1,6 +1,6 @@
 NAME = cub3D
 
-NAME_B = cub3D_B
+NAME_B = cub3D_bonus
 
 CC = cc
 
@@ -11,7 +11,6 @@ L = -L/Users/mel-harc/.brew/Cellar/glfw/3.3.8/lib
 I = -I/Users/mel-harc/.brew/Cellar/glfw/3.3.8/include/GLFW
 
 SUB = -framework Cocoa -framework OpenGL -framework IOKit -lglfw
-
 
 MLX	:= MLX42/build/libmlx42.a
 
@@ -52,7 +51,7 @@ OBJ_B = $(SRC_B:.c=.o)
 
 all : $(MLX) $(NAME)
 
-$(NAME) : $(OBJ) mandatory/cub3d.h  
+$(NAME) : $(OBJ) mandatory/cub3d.h mandatory/libft/libft.h
 	$(CC) $(CFLAGS) $(OBJ) $(SUB) $(LIBS) $(SEGS) -o $(NAME) $(L) $(I) $(MLX)
 
 %.o: %.c mandatory/cub3d.h mandatory/libft/libft.h
@@ -73,4 +72,4 @@ fclean : clean
 
 re : fclean all bonus
 
-.PHONY : clean all fclean re libmlx
+.PHONY : clean all fclean re libmlx bonus

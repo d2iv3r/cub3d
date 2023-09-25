@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
+/*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:44:21 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/24 14:44:24 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:07:04 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	get_rgb(t_map *s, int p, int yt, int xt)
 	int	b;
 	int	a;
 
-	r = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt)];
-	g = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt + 1)];
-	b = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt + 2)];
-	a = s->tex[p]->pixels[(4 * xt * s->tex[p]->width) + (4 * yt + 3)];
+	r = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt)];
+	g = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 1)];
+	b = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 2)];
+	a = s->tex[p]->pixels[(4 * yt * s->tex[p]->width) + (4 * xt + 3)];
 	s->color = get_color(r, g, b, a);
 }
 
@@ -108,7 +108,7 @@ void	put_tex_colmn(t_map *s, int x, double w_s, t_ray ray)
 		if (y + i > 0 && i + y < ROWS)
 		{
 			yt = i * ((float)s->tex[p]->height / w_s);
-			get_rgb(s, p, xt, yt);
+			get_rgb(s, p, yt, xt);
 			if (i + y >= 0 && i + y < ROWS && x >= 0 && x <= COLUMS)
 				mlx_put_pixel(s->img, x, y + i, s->color);
 		}

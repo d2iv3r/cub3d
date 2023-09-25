@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:46:55 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/24 14:47:04 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/25 11:16:39 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ double	first_cray(t_map *s, t_ray *r)
 		raycating_vertical(s, r);
 		dis_v = sqrt(pow(r->cxv - s->px, 2) + pow(r->cyv - s->py, 2));
 	}
-	return (ray_distance(dis_h, dis_v, r) * cos(s->ongl - r->ray_angle));
+	return (ray_distance(dis_h, dis_v, r, s) * cos(s->ongl - r->ray_angle));
 }
 
-double	ray_distance(double dis_h, double dis_v, t_ray *r)
+double	ray_distance(double dis_h, double dis_v, t_ray *r, t_map *s)
 {
-	if (dis_h != -1 && dis_h <= dis_v)
+	int	x;
+	int	y;
+
+	if (dis_h != -1 && dis_h < dis_v)
 	{
 		r->hith = 1;
 		return (dis_h);
@@ -68,6 +71,16 @@ double	ray_distance(double dis_h, double dis_v, t_ray *r)
 	else if (dis_v != -1 && dis_h > dis_v)
 	{
 		r->hith = 0;
+		return (dis_v);
+	}
+	else if (dis_h == dis_v && dis_h != -1 && dis_v != -1)
+	{
+		y = (int)((r->cyv / GRID) - 2);
+		x = (int)(r->cxv / GRID);
+		if (s->tmap->map[y][x] == '1')
+			r->hith = 0;
+		else
+			r->hith = 1;
 		return (dis_v);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: mel-harc <mel-harc@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 14:42:01 by mel-harc          #+#    #+#             */
-/*   Updated: 2023/09/24 16:56:01 by mel-harc         ###   ########.fr       */
+/*   Updated: 2023/09/25 10:07:53 by mel-harc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void			handler_move_view(t_map *s);
 void			check_steps_h(t_ray *r, t_map *s, float steps_x, float steps_y);
 void			check_steps_v(t_ray *r, t_map *s, float steps_x, float steps_y);
 void			draw_colome(t_map *s, int i, double w_s);
-double			ray_distance(double dis_h, double dis_v, t_ray *r);
+double			ray_distance(double dis_h, double dis_v, t_ray *r, t_map *s);
 void			pixels_wall(t_map *map, int x, int y);
 void			drawing_img(t_map *map);
 void			pixels_player(t_map *map, float x, float y);

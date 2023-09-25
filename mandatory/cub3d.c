@@ -6,7 +6,7 @@
 /*   By: efarhat <efarhat@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/28 11:36:33 by efarhat           #+#    #+#             */
-/*   Updated: 2023/09/24 11:05:30 by efarhat          ###   ########.fr       */
+/*   Updated: 2023/09/25 10:17:38 by efarhat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
 	t_map	map;
 
 	if (argc != 2)
-		return (1);
+		ft_error("Error\nInvalid arguments!", 1, 1);
 	else
 	{
 		tmap = malloc(sizeof(t_pmap));
