@@ -80,4 +80,4 @@ The game reads maps from `.cub` files. These files include:
 
 This project was developed collaboratively by:
 
-- **Teammate 1**: [GitHub Profile](https://github.com/mel-harc)
+- **MOHAMMED EL HARCHI**: [GitHub Profile](https://github.com/mel-harc)
